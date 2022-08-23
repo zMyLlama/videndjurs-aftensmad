@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { motion } from "framer-motion";
-import { device } from "../../js/Devices";
+import { device } from "../../js/devices";
 
 function Modal(props) {
     return ( 

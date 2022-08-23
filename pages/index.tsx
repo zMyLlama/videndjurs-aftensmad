@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { useState, useEffect } from "react";
 import { AnimatePresence, filterProps } from "framer-motion"
-import { device, fakeData } from "./js/Devices";
+import { device, fakeData } from "./js/devices";
 
 import Status from "./components/index/index.status";
 import Schedule from "./components/index/schedule.plan";
@@ -26,6 +26,19 @@ function Home() {
         (24 * 60 * 60 * 1000));
     const weekNumberResult = Math.ceil(days / 7);
     setWeekNumber(weekNumberResult);
+
+    const getDataFromRedis = async () => {
+      const res = await fetch('./api/getData', {
+        headers: {
+          'CONTENT_TYPE': 'application/json',
+        },
+        method: 'GET',
+      })
+
+      const result = await res.json();
+      setData(result)
+    }
+    getDataFromRedis();
   }, []);
 
   return ( 

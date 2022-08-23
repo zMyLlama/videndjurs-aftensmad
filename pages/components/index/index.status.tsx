@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import Image from 'next/image'
-import { device } from "../../js/Devices"
+import { device } from "../../js/devices"
 
 function Status(props: any) {
     return ( 

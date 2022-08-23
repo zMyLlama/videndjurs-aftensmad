@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { device } from "../../js/Devices";
+import { device } from "../../js/devices";
 
 import ScheduleItem from "./schedule.item";
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components"
-import { device } from "../../js/Devices"
+import { device } from "../../js/devices"
 
 function ScheduleItem(props: any) {
     const [ itemDate, setItemDate ] = useState("Fetching...")
