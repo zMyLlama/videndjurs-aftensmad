@@ -25,7 +25,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
-    z-index: 999999999;
+    z-index: 998;
 
     @media ${device.tablet} { 
         max-width: 100%;

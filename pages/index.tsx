@@ -1,15 +1,20 @@
 import styled from "styled-components"
 import { useState, useEffect } from "react";
+import { AnimatePresence, filterProps } from "framer-motion"
 import { device, fakeData } from "./js/Devices";
 
 import Status from "./components/index/index.status";
 import Schedule from "./components/index/schedule.plan";
 import RollDown from "./components/index/roll.down";
+import ReactionNotification from "./components/index/reaction-notification";
+import Modal from "./components/index/modal";
 
 function Home() {
   const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   const [ weekNumber, setWeekNumber ] = useState();
   const [ today, setToday ] = useState("Fetching date from local device...");
+  const [ allowRating, setAllowRating ] = useState(true);
+  const [ modalData, setModalData ] = useState(false);
   const [ data, setData ] = useState(fakeData);
 
   useEffect(() => {
@@ -25,6 +30,14 @@ function Home() {
 
   return ( 
     <Wrapper>
+      <AnimatePresence>
+        { modalData ?
+          <Modal setModalData={setModalData} modalData={modalData} />
+            :
+          null
+        }
+      </AnimatePresence>
+
       <SideAccent>
         <AccentText>M<br/>A<br/>D<br/>P<br/>L<br/>A<br/>N</AccentText>
       </SideAccent>
@@ -41,10 +54,27 @@ function Home() {
       
 
       <Bottom>
-        <Link>Noget galt? Skriv til os...</Link>
-        <Link>Spisetider</Link>
-        <Link>Opdaterings log</Link>
+        <Link 
+          onClick={() => 
+          setModalData(["Kontakt", 
+          ["Jeg orker ikke rigtig lave en kontakt form så bare skriv til mig gennem følgende veje:", <br/>,<br/>, <strong>Mail: noelgamsboel@gmail.com</strong>, <br/>, <strong>Telefon: +45 40494657</strong>, <br/>, <strong>Discord: zMyLlama#3455</strong> ]])} 
+        >
+          Noget galt? Skriv til os...
+        </Link>
+        <Link
+          onClick={() => 
+          setModalData(["Spisetider", 
+          [<strong>Hverdag:</strong>, <br/>, "Morgenmad: 7-9", <br/>, "Forkost: 11-13", <br/>, "Eftermiddagsboller: 15-16", <br/>, "Aftensmad: 18-19:30", <br/>,<br/>, <strong>Weekend:</strong>, <br/>, "Brunch: 9-12 (Gerne kom ned af flere gange)", <br/>, "Eftermiddagsboller: 15-16", <br/>, "Aftensmad: 18-19:30"]])} 
+        >
+          Spisetider
+        </Link>
+        <Link href="/update-log">Opdaterings log</Link>
       </Bottom>
+      <BottomFlex>
+        <AnimatePresence>
+          { allowRating ? <ReactionNotification setAllowRating={setAllowRating} data={data} today={today} /> : null }
+        </AnimatePresence>
+      </BottomFlex>
     </Wrapper>
   );
 }
@@ -82,15 +112,29 @@ const Bottom = styled.div`
   padding-left: 80px;
   height: 40px;
   width: 100%;
-  z-index: 9999;
+  z-index: 10;
 
   display: flex;
   column-gap: 25px;
 
-  @media ${device.tablet} { padding-left: 20px; column-gap: 15px; height: 30px; }
+  @media ${device.laptopS} { padding-left: 20px; column-gap: 15px; height: 35px; }
   @media ${device.desktop} {
     padding-left: 300px;
   }
+  @media ${device.mobileL} { height: 25px }
+`
+
+const BottomFlex = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0px;
+  height: 100px;
+
+  display: flex;
+  justify-content: center;
+  z-index: 999;
 `
 
 const Link = styled.a`

@@ -22,9 +22,15 @@ function ScheduleItem(props: any) {
     const getDateOfWeek = function(w: number, add: number) { //This shit dies when a leap year rolls around
         const currentTime = new window.Date();
         const y = currentTime.getFullYear();
-        var d = (1 + (w - 1) * 7); // 1st of January + 7 days for each week
         
-        const dateToWeek = new window.Date(y, 0, d);
+        var simple = new window.Date(y, 0, 1 + (w - 1) * 7);
+        var dow = simple.getDay();
+        const dateToWeek = simple;
+        if (dow <= 4)
+            dateToWeek.setDate(simple.getDate() - simple.getDay() + 1);
+        else
+            dateToWeek.setDate(simple.getDate() + 8 - simple.getDay());
+        
         var day = (60 * 60 * 24 * 1000) * add;
         const finalDate = new window.Date(dateToWeek.getTime() + day).toString();
         return finalDate.split(" ")[2];
@@ -35,7 +41,7 @@ function ScheduleItem(props: any) {
     }, []);
 
     return ( 
-        <TableRow today={ props.today == props.day ? true : false }>
+        <TableRow forceSmallestGap={props.forceSmallestGap} today={ props.today == props.day ? true : false }>
             <LeftWrapper>
                 <DayPrefix>{ props.data[props.day]["Prefix"] }</DayPrefix>
                 <Date>{ itemDate } <span style={{ color: "#888B90" }}>th</span></Date>
@@ -74,7 +80,7 @@ const TableRow = styled.div`
     }
     @media ${device.mobileL} { 
         height: 85px;
-        column-gap: 20px;
+        column-gap: ${props => props.forceSmallestGap ? "5px" : "20px"};
      }
 `
 

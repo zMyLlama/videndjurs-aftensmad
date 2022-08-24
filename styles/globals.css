@@ -22,6 +22,7 @@ body {
   margin: 0;
   font-family: Quicksand, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: var(--bg-color);
 }
 
 * {
@@ -85,4 +86,9 @@ p {
   color: #000000;
   font-weight: 400;
   font-size: 18px;
+}
+
+.tiny {
+  font-weight: 600;
+  font-size: 10px;
 }

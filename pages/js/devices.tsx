@@ -26,29 +26,36 @@ export const fakeData =
     ["Monday"]: {
         ["Meal"]: "Svinekøller m/flødekartofler",
         ["Prefix"]: "M",
+        ["Rating"]: 0,
     },
     ["Tuesday"]: {
         ["Meal"]: "Karrygryde m/chili, gulerødder, svine wokstrimler og ris",
         ["Prefix"]: "T",
+        ["Rating"]: 0,
     },
     ["Wednesday"]: {
         ["Meal"]: "Piratens pølsegryde m/pasta",
         ["Prefix"]: "O",
+        ["Rating"]: 0,
     },
     ["Thursday"]: {
         ["Meal"]: "Kyllingepande m/vilde ris",
         ["Prefix"]: "T",
+        ["Rating"]: 0,
     },
     ["Friday"]: {
         ["Meal"]: "Græsk moussaka",
         ["Prefix"]: "F",
+        ["Rating"]: 0,
     },
     ["Saturday"]: {
         ["Meal"]: "Fransk hotdogs og Koldskål m/kammerjunker",
         ["Prefix"]: "L",
+        ["Rating"]: 0,
     },
     ["Sunday"]: {
         ["Meal"]: "Kyllingelår m/petit kartofler og pikantost",
         ["Prefix"]: "S",
+        ["Rating"]: 0,
     },
 };
