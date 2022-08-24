@@ -11,17 +11,20 @@ import Modal from "./components/index/modal";
 
 function Home() {
   const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  const [ weekNumber, setWeekNumber ] = useState();
+  const [ weekNumber, setWeekNumber ] = useState(0);
   const [ today, setToday ] = useState("Fetching date from local device...");
   const [ allowRating, setAllowRating ] = useState(true);
-  const [ modalData, setModalData ] = useState(false);
+  const [ modalData, setModalData ] = useState({});
   const [ data, setData ] = useState(fakeData);
 
   useEffect(() => {
-    const date = new Date();
+    var date : any;
+    var startDate : any;
+
+    date = new Date();
     setToday(weekday[date.getDay()]);
     
-    const startDate = new Date(date.getFullYear(), 0, 1);
+    startDate = new Date(date.getFullYear(), 0, 1);
     const days = Math.floor((date - startDate) /
         (24 * 60 * 60 * 1000));
     const weekNumberResult = Math.ceil(days / 7);
@@ -69,15 +72,15 @@ function Home() {
       <Bottom>
         <Link 
           onClick={() => 
-          setModalData(["Kontakt", 
-          ["Jeg orker ikke rigtig lave en kontakt form så bare skriv til mig gennem følgende veje:", <br/>,<br/>, <strong>Mail: noelgamsboel@gmail.com</strong>, <br/>, <strong>Telefon: +45 40494657</strong>, <br/>, <strong>Discord: zMyLlama#3455</strong> ]])} 
+            setModalData(["Kontakt", 
+            ["Jeg orker ikke rigtig lave en kontakt form så bare skriv til mig gennem følgende veje:", <br/>,<br/>, <strong>Mail: noelgamsboel@gmail.com</strong>, <br/>, <strong>Telefon: +45 40494657</strong>, <br/>, <strong>Discord: zMyLlama#3455</strong> ]])} 
         >
           Noget galt? Skriv til os...
         </Link>
         <Link
           onClick={() => 
-          setModalData(["Spisetider", 
-          [<strong>Hverdag:</strong>, <br/>, "Morgenmad: 7-9", <br/>, "Forkost: 11-13", <br/>, "Eftermiddagsboller: 15-16", <br/>, "Aftensmad: 18-19:30", <br/>,<br/>, <strong>Weekend:</strong>, <br/>, "Brunch: 9-12 (Gerne kom ned af flere gange)", <br/>, "Eftermiddagsboller: 15-16", <br/>, "Aftensmad: 18-19:30"]])} 
+            setModalData(["Spisetider", 
+            [<strong>Hverdag:</strong>, <br/>, "Morgenmad: 7-9", <br/>, "Forkost: 11-13", <br/>, "Eftermiddagsboller: 15-16", <br/>, "Aftensmad: 18-19:30", <br/>,<br/>, <strong>Weekend:</strong>, <br/>, "Brunch: 9-12 (Gerne kom ned af flere gange)", <br/>, "Eftermiddagsboller: 15-16", <br/>, "Aftensmad: 18-19:30"]])} 
         >
           Spisetider
         </Link>

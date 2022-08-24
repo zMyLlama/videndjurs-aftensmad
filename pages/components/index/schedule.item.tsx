@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components"
 import { device } from "../../js/devices"
 
+interface Props {
+    forceSmallestGap : any
+    today: any
+}
+
 function ScheduleItem(props: any) {
     const [ itemDate, setItemDate ] = useState("Fetching...")
 
@@ -58,7 +63,7 @@ function ScheduleItem(props: any) {
      );
 }
 
-const TableRow = styled.div`
+const TableRow = styled.div<Props>`
     display: flex;
     align-items: center;
 
@@ -127,7 +132,7 @@ const pulseAnimation = keyframes`
     100% { outline: 10px solid rgba(66, 133, 244, 0); }
 `
 
-const WhenWrapper = styled.div`
+const WhenWrapper = styled.div<Pick<Props, 'today'>>`
     display: flex;
     align-items: center;
     justify-content: center;

@@ -12,6 +12,10 @@ const variants = {
     exit: { bottom: "-130px", height: "fit-content" },
 }
 
+interface Props {
+    isExpanded : boolean
+}
+
 function ReactionNotification(props: any) {
     const controls = useAnimationControls()
     const Rating = [ "😢", "🙁", "😐", "🙂", "😀️" ]
@@ -63,7 +67,7 @@ function ReactionNotification(props: any) {
                     }
                 </AnimatePresence>
 
-                <SVG expanded={expanded} onClick={() => {props.setAllowRating(false), setExpanded(false)} } width="16" height="16" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <SVG isExpanded={expanded} onClick={() => {props.setAllowRating(false), setExpanded(false)} } width="16" height="16" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 13L13 1" stroke="#4b4d52" stroke-linecap="round"/>
                     <path d="M13 13L1 1" stroke="#2D2F33" stroke-linecap="round"/>
                 </SVG>
@@ -147,12 +151,12 @@ const RatingButton = styled.h4`
     @media ${device.mobileL} { font-size: 20px; }
 `
 
-const SVG = styled.svg`
+const SVG = styled.svg<Props>`
     position: absolute;
     right: 15px;
     cursor: pointer;
 
-    top: ${props => props.expanded ? "12px" : ""};
+    top: ${props => props.isExpanded ? "12px" : ""};
 
     @media ${device.laptopL} { width: 22px; height: 22px; }
 `

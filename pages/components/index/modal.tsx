@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { motion } from "framer-motion";
 import { device } from "../../js/devices";
 
-function Modal(props) {
+function Modal(props: any) {
     return ( 
         <Wrapper
             transition={{ duration: 0.2 }}
