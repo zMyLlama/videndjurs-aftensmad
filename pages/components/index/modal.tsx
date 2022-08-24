@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { motion } from "framer-motion";
-import { device } from "../../js/devices";
+import { device } from "../../../js/devices";
 
 function Modal(props: any) {
     return ( 
@@ -13,7 +13,7 @@ function Modal(props: any) {
             <ModalWrapper>
                 <TopWrapper>
                     <Header>{ props.modalData[0] }</Header>
-                    <SVG onClick={() => props.setModalData(false) } width="16" height="16" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <SVG onClick={() => props.setModalData([]) } width="16" height="16" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 13L13 1" stroke="#4b4d52" stroke-linecap="round"/>
                         <path d="M13 13L1 1" stroke="#2D2F33" stroke-linecap="round"/>
                     </SVG>

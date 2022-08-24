@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { useState, useEffect } from "react";
 import { AnimatePresence, filterProps } from "framer-motion"
-import { device, fakeData } from "./js/devices";
+import { device, fakeData } from "../js/devices";
 
 import Status from "./components/index/index.status";
 import Schedule from "./components/index/schedule.plan";
@@ -10,12 +10,14 @@ import ReactionNotification from "./components/index/reaction-notification";
 import Modal from "./components/index/modal";
 
 function Home() {
+  const arr: any[] = [];
+
   const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   const [ weekNumber, setWeekNumber ] = useState(0);
   const [ today, setToday ] = useState("Fetching date from local device...");
   const [ allowRating, setAllowRating ] = useState(true);
-  const [ modalData, setModalData ] = useState({});
-  const [ data, setData ] = useState(fakeData);
+  const [ modalData, setModalData ] = useState(arr);
+  const [ data, setData ] = useState({"Week":34,"Monday":{"Meal":"Svinekøller m/flødekartofler","Prefix":"M","Rating":0},"Tuesday":{"Meal":"Karrygryde m/chili, gulerødder, svine wokstrimler og ris","Prefix":"T","Rating":0},"Wednesday":{"Meal":"Piratens pølsegryde m/pasta","Prefix":"O","Rating":0},"Thursday":{"Meal":"Kyllingepande m/vilde ris","Prefix":"T","Rating":0},"Friday":{"Meal":"Græsk moussaka","Prefix":"F","Rating":0},"Saturday":{"Meal":"Fransk hotdogs og Koldskål m/kammerjunker","Prefix":"L","Rating":0},"Sunday":{"Meal":"Kyllingelår m/petit kartofler og pikantost","Prefix":"S","Rating":0}});
 
   useEffect(() => {
     var date : any;
@@ -47,7 +49,7 @@ function Home() {
   return ( 
     <Wrapper>
       <AnimatePresence>
-        { modalData ?
+        { modalData.length != 0 ?
           <Modal setModalData={setModalData} modalData={modalData} />
             :
           null
@@ -62,7 +64,7 @@ function Home() {
       <CurrentWeek>
         <CurrentWeekText>Uge { weekNumber }</CurrentWeekText>
       </CurrentWeek>
-      <SupposedWeek>Nuværende madplan er for uge { data.Week }</SupposedWeek>
+      <SupposedWeek>Nuværende madplan er for uge { }</SupposedWeek>
 
       <Status data={data} week={weekNumber} />
       <Schedule today={today} data={data} />

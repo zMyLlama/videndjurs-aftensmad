@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components"
-import { device } from "../../js/devices"
+import { device } from "../../../js/devices"
 
 function RollDown() {
     return ( 

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { device } from "./js/devices"
+import { device } from "../js/devices"
 
 function UpdateLog() {
     return ( 

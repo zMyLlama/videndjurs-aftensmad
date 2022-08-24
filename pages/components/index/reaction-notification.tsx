@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import { motion, useAnimationControls, AnimatePresence } from "framer-motion"
-import { device } from "../../js/devices"
+import { device } from "../../../js/devices"
 
 import ScheduleItem from "./schedule.item"
 
