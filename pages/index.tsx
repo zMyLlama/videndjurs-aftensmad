@@ -9,6 +9,7 @@ import Schedule from "./components/index/schedule.plan";
 import RollDown from "./components/index/roll.down";
 import ReactionNotification from "./components/index/reaction-notification";
 import Modal from "./components/index/modal";
+import SyncLoader from "react-spinners/SyncLoader";
 
 const getHostName = function() {
   const URL = new window.URL(window.location.href).hostname;
@@ -65,7 +66,7 @@ function Home() {
     fetchData();
   }, []);
 
-  if (isLoading) return (<div></div>)
+  if (isLoading) return (<LoaderWrapper> <SyncLoader /> </LoaderWrapper>)
 
   return ( 
     <Wrapper>
@@ -120,6 +121,20 @@ function Home() {
     </Wrapper>
   );
 }
+
+const LoaderWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 1001;
+`
 
 const Wrapper = styled.div`
   width: calc(100% - 450px);

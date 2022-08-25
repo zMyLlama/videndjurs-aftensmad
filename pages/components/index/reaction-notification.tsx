@@ -28,9 +28,17 @@ function ReactionNotification(props: any) {
     const Rating = [ "😢", "🙁", "😐", "🙂", "😀️" ]
 
     const [expanded, setExpanded] = useState(false);
+    const [ hasReactedToday, sethasReactedToday ] = useState(true);
 
     const castRating = function(score: number) {
         props.setAllowRating(false);
+
+        var exdate = new Date();
+        exdate.setHours(23);
+        exdate.setMinutes(59);
+        exdate.setSeconds(59);
+        document.cookie='reactedToday=1; expires='+exdate+'; path=/';
+        
 
         const addRating = async function() {
             const res = await fetch(getHostName() + '/api/addRating', { /* https://campusmad.netlify.app/api/getData */
@@ -40,7 +48,6 @@ function ReactionNotification(props: any) {
                 'CONTENT_TYPE': 'application/json',
                 },
             })
-            console.log(await res.json());
         }
         addRating();
     }
@@ -56,11 +63,26 @@ function ReactionNotification(props: any) {
         const array = Object.keys(props.data)
         return array[index];
     }
+    const hasReactedTodayCheck = function() {
+        if (!document) return false;
+        const cookies = document.cookie.split(";");
+        var exists : boolean = false;
+        cookies.map((key) => {
+            if (key.split("=")[0].toString() == "reactedToday" || key.split("=")[0].toString() == " reactedToday") {
+                exists = true;
+            }
+        })
+
+        sethasReactedToday(exists);
+    }
 
     useEffect(() => {
         getHostName();
+        hasReactedTodayCheck();
         controls.start("animate");
     }, [])
+
+    if (hasReactedToday) return (<div></div>)
 
     return ( 
         <Wrapper

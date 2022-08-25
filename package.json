@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "@types/styled-components": "^5.1.26",
+    "axios": "^0.27.2",
     "dotenv": "^16.0.1",
     "framer-motion": "^7.2.1",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-spinners": "^0.13.4",
     "redis": "^4.3.0",
     "styled-components": "^5.3.5"
   },
