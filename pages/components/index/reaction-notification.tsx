@@ -11,7 +11,7 @@ const getHostName = function() {
     if (URL == "localhost") finalURL + ":3000";
     return finalURL;
 }
-
+    
 const variants = {
     initial: { bottom: "-110px" },
     animate: { bottom: "10px", height: "fit-content" },
@@ -34,6 +34,7 @@ function ReactionNotification(props: any) {
 
         const addRating = async function() {
             const res = await fetch(getHostName() + '/api/addRating', { /* https://campusmad.netlify.app/api/getData */
+                body: { ["data"]: "Bruh" },
                 headers: {
                 'CONTENT_TYPE': 'application/json',
                 },
@@ -94,7 +95,7 @@ function ReactionNotification(props: any) {
             <Line />
             <BottomWrapper>
                 { Rating.map((key, index) => {
-                    return <RatingButton key={index} onClick={ castRating }>{ key }</RatingButton>
+                    return <RatingButton key={index} onClick={() => castRating(index) }>{ key }</RatingButton>
                 }) }
             </BottomWrapper>
         </Wrapper>
@@ -154,7 +155,7 @@ const Question = styled.p`
     font-weight: 500;
     @media ${device.mobileL} { font-size: 14.5px; }
 `
-const More = styled.a`
+const More = styled.p`
     all: unset;
     width: fit-content;
     cursor: pointer;

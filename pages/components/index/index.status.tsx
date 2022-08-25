@@ -9,7 +9,7 @@ function Status(props: any) {
     return ( 
         <Wrapper>
             <NextImage>
-                <Image src={ props.data["Week"] == props.week ? "/SuccessIcon.png" : "/AlertIcon.png" } layout="fill" />
+                <Image src={ props.data["Week"] == props.week ? "/SuccessIcon.png" : "/AlertIcon.png" } alt="Status Symbol" layout="fill" />
             </NextImage>
             <FlexDown>
                 <AlertMessage>{ props.data["Week"] == props.week ? "Perfekt! Madplanen er helt opdateret 🎉" : "Hol’ up. Denne madplan er forældet 🥲" }</AlertMessage>

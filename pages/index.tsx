@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Head from 'next/head'
 import { useState, useEffect } from "react";
 import { AnimatePresence, filterProps } from "framer-motion"
 import { device, fakeData } from "../js/devices";
@@ -68,6 +69,11 @@ function Home() {
 
   return ( 
     <Wrapper>
+      <Head>
+        <title>Campus Madplan</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+
       <AnimatePresence>
         { modalData.length != 0 ?
           <Modal setModalData={setModalData} modalData={modalData} />
@@ -90,20 +96,20 @@ function Home() {
       <Schedule data={data} today={today} />
       <RollDown />
       <Bottom>
-        <Link 
+        <ClickableNonLink 
           onClick={() => 
             setModalData(["Kontakt", 
             ["Jeg orker ikke rigtig lave en kontakt form så bare skriv til mig gennem følgende veje:", <br/>,<br/>, <strong>Mail: noelgamsboel@gmail.com</strong>, <br/>, <strong>Telefon: +45 40494657</strong>, <br/>, <strong>Discord: zMyLlama#3455</strong> ]])} 
         >
           Noget galt? Skriv til os...
-        </Link>
-        <Link
+        </ClickableNonLink>
+        <ClickableNonLink
           onClick={() => 
             setModalData(["Spisetider", 
             [<strong>Hverdag:</strong>, <br/>, "Morgenmad: 7-9", <br/>, "Forkost: 11-13", <br/>, "Eftermiddagsboller: 15-16", <br/>, "Aftensmad: 18-19:30", <br/>,<br/>, <strong>Weekend:</strong>, <br/>, "Brunch: 9-12 (Gerne kom ned af flere gange)", <br/>, "Eftermiddagsboller: 15-16", <br/>, "Aftensmad: 18-19:30"]])} 
         >
           Spisetider
-        </Link>
+        </ClickableNonLink>
         <Link href="/update-log">Opdaterings log</Link>
       </Bottom>
       <BottomFlex>
@@ -171,6 +177,16 @@ const BottomFlex = styled.div`
   display: flex;
   justify-content: center;
   z-index: 999;
+`
+
+const ClickableNonLink = styled.p`
+  all: unset;
+  font-family: Quicksand;
+  font-size: 18px;
+  text-decoration: underline;
+  cursor: pointer;
+
+  @media ${device.tablet} { font-size: 12px; }
 `
 
 const Link = styled.a`
