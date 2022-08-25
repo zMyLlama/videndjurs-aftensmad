@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Head from 'next/head'
 import { useState, useEffect } from "react";
 import { AnimatePresence, filterProps } from "framer-motion"
@@ -66,7 +66,10 @@ function Home() {
     fetchData();
   }, []);
 
-  if (isLoading) return (<LoaderWrapper> <SyncLoader /> </LoaderWrapper>)
+  if (isLoading) return (<LoaderWrapper> 
+    <SyncLoader /> 
+    <LoadingDisclaimer style={{ textAlign: 'center', paddingLeft: '15px', paddingRight: '15px' }}><strong>BETA:</strong> hvis du har loadet i lang nok tid til at se denne besked så er der med 99% sikkerhed et problem i databasen. Kom tilbage om et par timer eller i morgen hvor det med højst sandsynlighed er fixet.</LoadingDisclaimer>
+  </LoaderWrapper>)
 
   return ( 
     <Wrapper>
@@ -132,6 +135,7 @@ const LoaderWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 
   z-index: 1001;
 `
@@ -293,6 +297,19 @@ const CurrentWeekText = styled.h1`
 const SupposedWeek = styled.h5`
   margin-bottom: 65px;
   @media ${device.tablet} { font-size: 20px; margin-bottom: 30px; }
+`
+
+const waitWithSpawningDisclaimer = keyframes`
+  0% { height: 0px; marginTop: 0px }
+  99% { height: 0px; marginTop: 0px }
+  100% { height: fit-content; marginTop: 30px }
+`
+
+const LoadingDisclaimer = styled.p`
+  margin-top: 30px;
+  overflow-y: hidden;
+  animation-name: ${waitWithSpawningDisclaimer};
+  animation-duration: 4s;
 `
 
 export default Home;
