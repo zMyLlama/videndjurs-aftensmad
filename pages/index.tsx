@@ -11,7 +11,7 @@ import Modal from "./components/index/modal";
 
 const getHostName = function() {
   const URL = new window.URL(window.location.href).hostname;
-  var finalURL = "http://" + URL;
+  var finalURL = "https://" + URL;
   if (URL == "localhost") finalURL = "http://localhost:3000";
   return finalURL;
 }
