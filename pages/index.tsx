@@ -78,7 +78,7 @@ function Home() {
       <CurrentWeek>
         <CurrentWeekText>Uge { weekNumber }</CurrentWeekText>
       </CurrentWeek>
-      <SupposedWeek>Nuværende madplan er for uge { }</SupposedWeek>
+      <SupposedWeek>Nuværende madplan er for uge { data["Week"]}</SupposedWeek>
 
       <Status data={data} week={weekNumber} />
       <Schedule data={data} today={today} />
