@@ -4,13 +4,16 @@ import { device } from "../../../js/devices";
 import ScheduleItem from "./schedule.item";
 
 function Schedule(props: any) {
+
+    if (!props.data) return (<div></div>)
+
     return ( 
         <Wrapper>
             { Object.keys(props.data).map((key, index) => {
                 if (key.toLowerCase() != "week") {
                     return <ScheduleItem key={key} data={props.data} day={key} today={props.today} index={index} />
                 }
-            })}
+            }) }
         </Wrapper>
      );
 }

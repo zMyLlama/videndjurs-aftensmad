@@ -21,39 +21,39 @@ export const device = {
 };
 
 export const fakeData = {
-    "Week": 34,
+    "Week": 0,
     "Monday": {
-        "Meal": "Svinekøller m/flødekartofler",
+        "Meal": "Loading...",
         "Prefix": "M",
         "Rating": 0
     },
     "Tuesday": {
-        "Meal": "Karrygryde m/chili, gulerødder, svine wokstrimler og ris",
+        "Meal": "Loading...",
         "Prefix": "T",
         "Rating": 0
     },
     "Wednesday": {
-        "Meal": "Piratens pølsegryde m/pasta",
+        "Meal": "Loading...",
         "Prefix": "O",
         "Rating": 0
     },
     "Thursday": {
-        "Meal": "Kyllingepande m/vilde ris",
+        "Meal": "Loading...",
         "Prefix": "T",
         "Rating": 0
     },
     "Friday": {
-        "Meal": "Græsk moussaka",
+        "Meal": "Loading...",
         "Prefix": "F",
         "Rating": 0
     },
     "Saturday": {
-        "Meal": "Fransk hotdogs og Koldskål m/kammerjunker",
+        "Meal": "Loading...",
         "Prefix": "L",
         "Rating": 0
     },
     "Sunday": {
-        "Meal": "Kyllingelår m/petit kartofler og pikantost",
+        "Meal": "Loading...",
         "Prefix": "S",
         "Rating": 0
     }

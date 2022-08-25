@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { AnimatePresence, filterProps } from "framer-motion"
 import { device, fakeData } from "../js/devices";
@@ -10,16 +10,23 @@ import ReactionNotification from "./components/index/reaction-notification";
 import Modal from "./components/index/modal";
 
 function Home() {
+  const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   const arr: any[] = [];
 
-  const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   const [ weekNumber, setWeekNumber ] = useState(0);
   const [ today, setToday ] = useState("Fetching date from local device...");
   const [ allowRating, setAllowRating ] = useState(true);
   const [ modalData, setModalData ] = useState(arr);
-  const [ data, setData ] = useState({"Week":34,"Monday":{"Meal":"Svinekøller m/flødekartofler","Prefix":"M","Rating":0},"Tuesday":{"Meal":"Karrygryde m/chili, gulerødder, svine wokstrimler og ris","Prefix":"T","Rating":0},"Wednesday":{"Meal":"Piratens pølsegryde m/pasta","Prefix":"O","Rating":0},"Thursday":{"Meal":"Kyllingepande m/vilde ris","Prefix":"T","Rating":0},"Friday":{"Meal":"Græsk moussaka","Prefix":"F","Rating":0},"Saturday":{"Meal":"Fransk hotdogs og Koldskål m/kammerjunker","Prefix":"L","Rating":0},"Sunday":{"Meal":"Kyllingelår m/petit kartofler og pikantost","Prefix":"S","Rating":0}});
+
+  const [ data, setData ] = useState(fakeData);
+  const [ isLoading, setIsLoading ] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
+
+    /*
+      Get week number from users device.
+    */
     var date : any;
     var startDate : any;
 
@@ -32,8 +39,11 @@ function Home() {
     const weekNumberResult = Math.ceil(days / 7);
     setWeekNumber(weekNumberResult);
 
-    const getDataFromRedis = async () => {
-      const res = await fetch('./api/getData', {
+    /*
+      Function that fetchs the data on the client and populates the client with it.
+    */
+    const fetchData = async function() {
+      const res = await fetch('http://localhost:3000/api/getData', {
         headers: {
           'CONTENT_TYPE': 'application/json',
         },
@@ -41,10 +51,14 @@ function Home() {
       })
 
       const result = await res.json();
-      setData(result)
+      console.log(result);
+      setData(result);
+      setIsLoading(false);
     }
-    getDataFromRedis();
+    fetchData();
   }, []);
+
+  if (isLoading) return (<h1>Loading...</h1>)
 
   return ( 
     <Wrapper>
@@ -67,10 +81,8 @@ function Home() {
       <SupposedWeek>Nuværende madplan er for uge { }</SupposedWeek>
 
       <Status data={data} week={weekNumber} />
-      <Schedule today={today} data={data} />
+      <Schedule data={data} today={today} />
       <RollDown />
-      
-
       <Bottom>
         <Link 
           onClick={() => 

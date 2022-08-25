@@ -3,6 +3,9 @@ import Image from 'next/image'
 import { device } from "../../../js/devices"
 
 function Status(props: any) {
+
+    if (!props.data) return (<div></div>)
+
     return ( 
         <Wrapper>
             <NextImage>

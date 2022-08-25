@@ -6,9 +6,9 @@ client.on('error', (err) => console.log('Redis experienced an error: ', err));
 client.on("connect", () => console.log('Redis is connected'))
 client.on("ready", () => console.log('Redis is ready'))
 
-const connection = client.connect();
-
 export async function getData() {
-    console.log(new Date());
-    return await client.json.get('meal-plan');
+    await client.connect();
+    const data = await client.json.get('meal-plan');
+    client.disconnect();
+    return data
 }   

@@ -45,6 +45,8 @@ function ScheduleItem(props: any) {
         setItemDate(getDateOfWeek(props.data["Week"], props.index - 1))
     }, []);
 
+    if (!props.data) return (<div></div>)
+
     return ( 
         <TableRow forceSmallestGap={props.forceSmallestGap} today={ props.today == props.day ? true : false }>
             <LeftWrapper>

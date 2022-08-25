@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { device } from "../../../js/devices";
 
 function Modal(props: any) {
+    const modalData = props.modalData || []
+
     return ( 
         <Wrapper
             transition={{ duration: 0.2 }}
@@ -12,7 +14,7 @@ function Modal(props: any) {
         >
             <ModalWrapper>
                 <TopWrapper>
-                    <Header>{ props.modalData[0] }</Header>
+                    <Header>{ modalData[0] }</Header>
                     <SVG onClick={() => props.setModalData([]) } width="16" height="16" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 13L13 1" stroke="#4b4d52" stroke-linecap="round"/>
                         <path d="M13 13L1 1" stroke="#2D2F33" stroke-linecap="round"/>
@@ -20,7 +22,7 @@ function Modal(props: any) {
                 </TopWrapper>
                 <Line />
                 <BottomWrapper>
-                    <Text>{ props.modalData[1] }</Text>
+                    <Text>{ modalData[1] }</Text>
                 </BottomWrapper>
             </ModalWrapper>
         </Wrapper>
