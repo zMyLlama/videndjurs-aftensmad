@@ -5,6 +5,13 @@ import { device } from "../../../js/devices"
 
 import ScheduleItem from "./schedule.item"
 
+const getHostName = function() {
+    const URL = new window.URL(window.location.href).hostname;
+    const finalURL = "https://" + URL;
+    if (URL == "localhost") finalURL + ":3000";
+    return finalURL;
+}
+
 const variants = {
     initial: { bottom: "-110px" },
     animate: { bottom: "10px", height: "fit-content" },
@@ -24,6 +31,17 @@ function ReactionNotification(props: any) {
 
     const castRating = function() {
         props.setAllowRating(false);
+
+        const addRating = async function() {
+            const res = await fetch(getHostName() + '/api/addRating', { /* https://campusmad.netlify.app/api/getData */
+                headers: {
+                'CONTENT_TYPE': 'application/json',
+                },
+                method: 'POST',
+            })
+            console.log(res);
+        }
+        addRating();
     }
     const expandClick = function() {
         if (!expanded) {setExpanded(true); controls.start("expand"); return;}
@@ -39,6 +57,7 @@ function ReactionNotification(props: any) {
     }
 
     useEffect(() => {
+        getHostName();
         controls.start("animate");
     }, [])
 

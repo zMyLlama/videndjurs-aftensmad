@@ -9,6 +9,13 @@ import RollDown from "./components/index/roll.down";
 import ReactionNotification from "./components/index/reaction-notification";
 import Modal from "./components/index/modal";
 
+const getHostName = function() {
+  const URL = new window.URL(window.location.href).hostname;
+  var finalURL = "http://" + URL;
+  if (URL == "localhost") finalURL = "http://localhost:3000";
+  return finalURL;
+}
+
 function Home() {
   const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   const arr: any[] = [];
@@ -43,7 +50,7 @@ function Home() {
       Function that fetchs the data on the client and populates the client with it.
     */
     const fetchData = async function() {
-      const res = await fetch('https://campusmad.netlify.app//api/getData', {
+      const res = await fetch(getHostName() + '/api/getData', { /* https://campusmad.netlify.app/api/getData */
         headers: {
           'CONTENT_TYPE': 'application/json',
         },
@@ -51,7 +58,6 @@ function Home() {
       })
 
       const result = await res.json();
-      console.log(result);
       setData(result);
       setIsLoading(false);
     }
