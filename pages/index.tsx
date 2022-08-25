@@ -43,7 +43,7 @@ function Home() {
       Function that fetchs the data on the client and populates the client with it.
     */
     const fetchData = async function() {
-      const res = await fetch('http://localhost:3000/api/getData', {
+      const res = await fetch('https://campusmad.netlify.app//api/getData', {
         headers: {
           'CONTENT_TYPE': 'application/json',
         },
@@ -58,7 +58,7 @@ function Home() {
     fetchData();
   }, []);
 
-  if (isLoading) return (<h1>Loading...</h1>)
+  if (isLoading) return (<div></div>)
 
   return ( 
     <Wrapper>
