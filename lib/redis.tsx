@@ -1,6 +1,7 @@
 import { createClient } from 'redis';
 require('dotenv').config()
 
+const weekday = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
 const client = createClient({ url: process.env.REDIS_URL });
 client.connect()
 
@@ -12,10 +13,14 @@ export async function getData() {
     return data
 }   
 
-export async function addRating() {
+export async function addRating(body: any) {
+    if (body > 4 && body < 0) return;
+
+    console.log(body);
     const today = new Date();
     const yesterday = new Date(today.setDate(today.getDate() - 1)).getDay();
+    const day = weekday[yesterday]
+
     const data = await client.json.get('meal-plan');
-    console.log(yesterday);
-    return "success"
+    return day
 }

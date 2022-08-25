@@ -7,8 +7,8 @@ import ScheduleItem from "./schedule.item"
 
 const getHostName = function() {
     const URL = new window.URL(window.location.href).hostname;
-    const finalURL = "https://" + URL;
-    if (URL == "localhost") finalURL + ":3000";
+    var finalURL = "https://" + URL;
+    if (URL == "localhost") finalURL = "http://localhost:3000";
     return finalURL;
 }
     
@@ -29,18 +29,18 @@ function ReactionNotification(props: any) {
 
     const [expanded, setExpanded] = useState(false);
 
-    const castRating = function() {
+    const castRating = function(score: number) {
         props.setAllowRating(false);
 
         const addRating = async function() {
             const res = await fetch(getHostName() + '/api/addRating', { /* https://campusmad.netlify.app/api/getData */
-                body: { ["data"]: "Bruh" },
+                method: 'POST',
+                body: JSON.stringify(score),
                 headers: {
                 'CONTENT_TYPE': 'application/json',
                 },
-                method: 'POST',
             })
-            console.log(res);
+            console.log(await res.json());
         }
         addRating();
     }
