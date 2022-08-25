@@ -83,7 +83,7 @@ function ReactionNotification(props: any) {
     }, [])
 
     return ( 
-        <div>
+        <AllWrapper>
             { hasReactedToday ?
                 <div></div>
             :
@@ -124,9 +124,24 @@ function ReactionNotification(props: any) {
                     </BottomWrapper>
                 </Wrapper>
             }
-        </div>
+        </AllWrapper>
      );
 }
+
+const AllWrapper = styled.div`
+    max-width: 750px;
+    min-width: 610px;
+    width: 30vw;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1;
+
+    display: flex;
+    justify-content: center;
+
+    @media ${device.tablet} { width: 40vw; min-width: 450px; }
+    @media ${device.mobileL} { width: calc(100vw - 40px); min-width: 0px; }
+`
 
 const Wrapper = styled(motion.div)`
     position: absolute;
