@@ -51,9 +51,9 @@ export async function addRating(body: any) {
 
     await axios.get(process.env.TIMEZONE_URL)
         .then(async function (response : any) {
-            const today = new Date(response.data.timestamp * 1000);
+            const today = new Date(response.data.timestamp * 1000);    
             const yesterday = new Date(today.setDate(today.getDate() - 1)).getDay();
-            const day = weekday[yesterday - 1]
+            const day = weekday[yesterday]
 
             const userData : any = await client.json.get('data');
             const mealData : any = await client.json.get('meal-plan');

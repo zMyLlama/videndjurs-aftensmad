@@ -28,7 +28,7 @@ function ReactionNotification(props: any) {
     const Rating = [ "😢", "🙁", "😐", "🙂", "😀️" ]
 
     const [expanded, setExpanded] = useState(false);
-    const [ hasReactedToday, sethasReactedToday ] = useState(true);
+    const [ hasReactedToday, sethasReactedToday ] = useState(false);
 
     const castRating = function(score: number) {
         props.setAllowRating(false);
@@ -72,7 +72,7 @@ function ReactionNotification(props: any) {
                 exists = true;
             }
         })
-
+        
         sethasReactedToday(exists);
     }
 
@@ -82,45 +82,49 @@ function ReactionNotification(props: any) {
         controls.start("animate");
     }, [])
 
-    if (hasReactedToday) return (<div></div>)
-
     return ( 
-        <Wrapper
-            initial={"initial"}
-            animate={controls}
-            exit={"exit"}
-            variants={variants}
-        >
-            <TopWrapper>
-                <Question>Hvad syntes du om maden i går?</Question>
-                <More onClick={ expandClick }>{ expanded ? "Jeg er ikke dement længere" : "Dement? Se hvad vi fik i går" }</More>
+        <div>
+            { hasReactedToday ?
+                <div></div>
+            :
+                <Wrapper
+                    initial={"initial"}
+                    animate={controls}
+                    exit={"exit"}
+                    variants={variants}
+                >
+                    <TopWrapper>
+                        <Question>Hvad syntes du om maden i går?</Question>
+                        <More onClick={ expandClick }>{ expanded ? "Jeg er ikke dement længere" : "Dement? Se hvad vi fik i går" }</More>
 
-                <AnimatePresence>
-                    { expanded ?
-                        <YesterdayMealWrapper
-                            initial={{ height: "0px", marginTop: "10px", marginBottom: "20px" }}
-                            animate={{ height: "fit-content", marginTop: "10px", marginBottom: "20px" }}
-                            exit={{ height: "0px", marginTop: "0px", marginBottom: "0px" }}
-                        >
-                            <ScheduleItem data={props.data} day={findValueOfIndex(findIndexOfKey(props.today) - 1)} today={props.today} index={findIndexOfKey(props.today) - 1} forceSmallestGap={true} />
-                        </YesterdayMealWrapper>
-                        :
-                        null
-                    }
-                </AnimatePresence>
+                        <AnimatePresence>
+                            { expanded ?
+                                <YesterdayMealWrapper
+                                    initial={{ height: "0px", marginTop: "10px", marginBottom: "20px" }}
+                                    animate={{ height: "fit-content", marginTop: "10px", marginBottom: "20px" }}
+                                    exit={{ height: "0px", marginTop: "0px", marginBottom: "0px" }}
+                                >
+                                    <ScheduleItem data={props.data} day={findValueOfIndex(findIndexOfKey(props.today) - 1)} today={props.today} index={findIndexOfKey(props.today) - 1} forceSmallestGap={true} />
+                                </YesterdayMealWrapper>
+                                :
+                                null
+                            }
+                        </AnimatePresence>
 
-                <SVG isExpanded={expanded} onClick={() => {props.setAllowRating(false), setExpanded(false)} } width="16" height="16" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 13L13 1" stroke="#4b4d52" stroke-linecap="round"/>
-                    <path d="M13 13L1 1" stroke="#2D2F33" stroke-linecap="round"/>
-                </SVG>
-            </TopWrapper>
-            <Line />
-            <BottomWrapper>
-                { Rating.map((key, index) => {
-                    return <RatingButton key={index} onClick={() => castRating(index) }>{ key }</RatingButton>
-                }) }
-            </BottomWrapper>
-        </Wrapper>
+                        <SVG isExpanded={expanded} onClick={() => {props.setAllowRating(false), setExpanded(false)} } width="16" height="16" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 13L13 1" stroke="#4b4d52" stroke-linecap="round"/>
+                            <path d="M13 13L1 1" stroke="#2D2F33" stroke-linecap="round"/>
+                        </SVG>
+                    </TopWrapper>
+                    <Line />
+                    <BottomWrapper>
+                        { Rating.map((key, index) => {
+                            return <RatingButton key={index} onClick={() => castRating(index) }>{ key }</RatingButton>
+                        }) }
+                    </BottomWrapper>
+                </Wrapper>
+            }
+        </div>
      );
 }
 
