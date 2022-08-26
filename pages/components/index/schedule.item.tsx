@@ -156,6 +156,7 @@ const WhenText = styled.h6`
     font-weight: bold;
     margin-left: 20px;
     margin-right: 20px;
+    white-space: nowrap;
     
     
     @media ${device.tablet} { font-size: 16px; margin-left: 15px; margin-right: 15px; }
