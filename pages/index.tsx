@@ -98,7 +98,7 @@ function Home() {
 
       <Status data={data} week={weekNumber} />
       <Schedule data={data} today={today} />
-      <RollDown />
+      <RollDown setModalData={setModalData} />
       <Bottom>
         <ClickableNonLink 
           onClick={() => 

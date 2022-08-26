@@ -32,16 +32,17 @@ function ReactionNotification(props: any) {
 
     const castRating = function(score: number) {
         props.setAllowRating(false);
+        setExpanded(false);
 
         var exdate = new Date();
         exdate.setHours(23);
         exdate.setMinutes(59);
         exdate.setSeconds(59);
-        document.cookie='reactedToday=1; expires='+exdate+'; path=/';
+        document.cookie='reactedToday=1; expires='+exdate+'; path=/; SameSite=lax';
         
 
         const addRating = async function() {
-            const res = await fetch(getHostName() + '/api/addRating', { /* https://campusmad.netlify.app/api/getData */
+            await fetch(getHostName() + '/api/addRating', { /* https://campusmad.netlify.app/api/getData */
                 method: 'POST',
                 body: JSON.stringify(score),
                 headers: {

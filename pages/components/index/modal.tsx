@@ -53,6 +53,7 @@ const ModalWrapper = styled.div`
     padding-top: 15px;
     padding-bottom: 15px;
     min-width: 700px;
+    max-width: 1200px;
     width: fit-content;
 
     @media ${device.tablet} { min-width: 80%; }

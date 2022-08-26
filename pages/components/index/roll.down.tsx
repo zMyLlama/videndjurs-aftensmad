@@ -1,9 +1,28 @@
 import styled, { keyframes } from "styled-components"
 import { device } from "../../../js/devices"
 
-function RollDown() {
+interface Props {
+    position : string
+}
+
+function RollDown(props : any) {
+    const switchWeek = function() {
+        props.setModalData(["Kommer snart...", ['Du sidder måske der og tænker, wow det er rimelig cool det her men mig og the ', <strong>BOYS</strong>, ' har en discord kanal og vi elsker at stå og fotografere madplanen hver mandag og det er helt fair... ', <strong>MEN</strong>, ' her på Campus mad er vi virkelig "nytækende" og har derfor lavet et samarbejde med køkkent så du kan se 2-4 uger frem i madplanen selvfølgelig med potentailt minimale ændringer.', <br/>, <br/>, "Hvis du ikke har læst titlen på denne modal så er featuren ikke ude endnu men den kommer inden den 5/9/2022."]])
+    }
+
     return ( 
         <Wrapper>
+            <SwitchWeek onClick={switchWeek} position="left">
+                <SVG position="left" viewBox="0 0 12 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.5 9.5L10.5 1.5L10.5 17.5L1.5 9.5Z" fill="white" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </SVG>
+            </SwitchWeek>
+            <SwitchWeek onClick={switchWeek} position="right">
+                <SVG position="right" viewBox="0 0 12 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.5 9.5L10.5 1.5L10.5 17.5L1.5 9.5Z" fill="white" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </SVG>
+            </SwitchWeek>
+
             <RollWrapper>
                 <Circle></Circle>
             </RollWrapper>
@@ -12,7 +31,39 @@ function RollDown() {
      );
 }
 
+const SwitchWeek = styled.button<Props>`
+    position: absolute;
+    ${props => props.position == "left" && 'left: 0px;'}
+    ${props => props.position == "right" && 'right: 0px;'}
+    background-color: var(--logo-color);
+    border-radius: 10px;
+    width: 50px;
+    aspect-ratio: 1 / 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0.6;
+    cursor: not-allowed;
+
+    @media ${device.tablet} { width: 45px; }
+    @media ${device.mobileL} { width: 40px; margin-right: 20px }
+`
+
+const SVG = styled.svg<Props>`
+    width: 14px;
+    height: 24px;
+    ${props => props.position == "right" && 'transform: scale(-1);'}
+
+    @media ${device.mobileL} {
+        width: 11px;
+        height: 18px;
+    }
+`
+
 const Wrapper = styled.div`
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
