@@ -46,7 +46,7 @@ function Home() {
     const days = Math.floor((date - startDate) /
         (24 * 60 * 60 * 1000));
     var weekNumberResult = Math.ceil(days / 7);
-    today == "Sunday" ? weekNumberResult -= 1 : null; // De satans amerikanere.
+    weekday[date.getDay()] == "Sunday" ? weekNumberResult -= 1 : null; // De satans amerikanere.
     setWeekNumber(weekNumberResult);
 
     /*
