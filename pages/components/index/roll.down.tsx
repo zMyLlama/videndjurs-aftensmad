@@ -7,7 +7,7 @@ interface Props {
 
 function RollDown(props : any) {
     const switchWeek = function() {
-        props.setModalData(["Kommer snart...", ['Du sidder måske der og tænker, wow det er rimelig cool det her men mig og the ', <strong>BOYS</strong>, ' har en discord kanal og vi elsker at stå og fotografere madplanen hver mandag og det er helt fair... ', <strong>MEN</strong>, ' her på Campus mad er vi virkelig "nytækende" og har derfor lavet et samarbejde med køkkent så du kan se 2-4 uger frem i madplanen selvfølgelig med potentailt minimale ændringer.', <br/>, <br/>, "Hvis du ikke har læst titlen på denne modal så er featuren ikke ude endnu men den kommer inden den 5/9/2022."]])
+        props.setModalData(["Kommer snart...", ['Du sidder måske der og tænker, wow det er rimelig cool det her men mig og the ', <strong>BOYS</strong>, ' har en discord kanal og vi elsker at stå og fotografere madplanen hver mandag og det er helt fair... ', <strong>MEN</strong>, ' her på Campus mad er vi virkelig "nytækende" og har derfor lavet et samarbejde med køkkent så du kan se 2-4 uger frem i madplanen selvfølgelig med potentailt minimale ændringer.', <br/>, <br/>, "På grund af delay er denne features udkommelses tid ukendt."]])
     }
 
     return ( 
