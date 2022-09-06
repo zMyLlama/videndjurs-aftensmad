@@ -27,7 +27,7 @@ function Home() {
   const [ allowRating, setAllowRating ] = useState(true);
   const [ modalData, setModalData ] = useState(
     ["Omkring opdateringen...", 
-    ["Som nogen måske ved var det meningen at der i dag skulle udkomme update 2 hvor du blandt andet kan se længere ud i madplanen. Den udkommer dog ikke længere i dag.", <br/>,<br/>, "Jeg udskyder opdateringen med nok omkring en uge, til gengæld tilføjer jeg dark mode og fikser flere bugs.", <br/>,<br/>, <strong>Denne besked bliver permanent fjernet den 11/5/2022. I må leve med den indtil da.</strong>]]
+    ["Som nogen måske ved var det meningen at der i dag skulle udkomme update 2 hvor du blandt andet kan se længere ud i madplanen. Den udkommer dog ikke længere i dag.", <br/>,<br/>, "Jeg udskyder opdateringen med nok omkring en uge, til gengæld tilføjer jeg dark mode og fikser flere bugs.", <br/>,<br/>, <strong>Denne besked bliver permanent fjernet den 10/6/2022. I må leve med den indtil da. (Jeg fejlede med datoen)</strong>]]
   );
 
   const [ data, setData ] = useState(fakeData);
