@@ -25,10 +25,7 @@ function Home() {
   const [ weekNumber, setWeekNumber ] = useState(0);
   const [ today, setToday ] = useState("Fetching date from local device...");
   const [ allowRating, setAllowRating ] = useState(true);
-  const [ modalData, setModalData ] = useState(
-    ["Omkring opdateringen...", 
-    ["Som nogen måske ved var det meningen at der i dag skulle udkomme update 2 hvor du blandt andet kan se længere ud i madplanen. Den udkommer dog ikke længere i dag.", <br/>,<br/>, "Jeg udskyder opdateringen med nok omkring en uge, til gengæld tilføjer jeg dark mode og fikser flere bugs.", <br/>,<br/>, <strong>Denne besked bliver permanent fjernet den 10/6/2022. I må leve med den indtil da. (Jeg fejlede med datoen)</strong>]]
-  );
+  const [ modalData, setModalData ] = useState(arr);
 
   const [ data, setData ] = useState(fakeData);
   const [ isLoading, setIsLoading ] = useState(true);
