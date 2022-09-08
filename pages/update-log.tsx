@@ -110,9 +110,10 @@ const UpdateWrapperHeader = styled.h5`
     
 `
 const BackText = styled.h6`
+    user-select: none;
     -moz-user-select: none;
-   -khtml-user-select: none;
-   -webkit-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
 `
 
 const Text = styled.p`

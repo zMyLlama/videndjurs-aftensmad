@@ -19,7 +19,6 @@ function ScheduleItem(props: any) {
     const getWhenText = function() {
         const currentDayIndex = findIndexOfKey(props.today);    
         const todayDayIndex = findIndexOfKey(props.day);
-        console.log(props.today, props.day);
 
         if (props.data["Week"] < props.deviceWeekNumber) return "Tidligere"
         if (props.currentlySelectedWeek > props.deviceWeekNumber) return "Senere uge"
