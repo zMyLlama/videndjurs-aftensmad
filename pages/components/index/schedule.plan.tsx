@@ -11,11 +11,11 @@ function Schedule(props: any) {
         <Wrapper>
             { Object.keys(props.data).map((key, index) => {
                 if (key.toLowerCase() != "week") {
-                    return <ScheduleItem key={key} data={props.data} day={key} today={props.today} index={index} />
+                    return <ScheduleItem key={key} data={props.data} day={key} today={props.today} index={index} deviceWeekNumber={props.deviceWeekNumber} currentlySelectedWeek={props.selectedWeek} />
                 }
             }) }
         </Wrapper>
-     );
+    );
 }
 
 const Wrapper = styled.div`
@@ -23,7 +23,7 @@ const Wrapper = styled.div`
     box-sizing: initial;
     max-width: 1200px;
     width: 75%;
-    max-height: calc(100% - 400px);
+    max-height: calc(100% - 350px);
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -35,8 +35,8 @@ const Wrapper = styled.div`
         padding-left: 10px;
         padding-right: 20px;
         width: calc(100% - 30px);
-        max-height: calc(100% - 340px);
-     }
+        max-height: calc(100% - 280px);
+    }
 `
 
 export default Schedule;

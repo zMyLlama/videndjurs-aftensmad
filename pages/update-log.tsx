@@ -29,6 +29,31 @@ function UpdateLog() {
 
             <UpdateHeader>Update log <span className="tiny">i literally hard coded this... 💀</span></UpdateHeader>
             <UpdateWrapper>
+                <UpdateWrapperHeader>UPDATE TWOWOO</UpdateWrapperHeader>
+                <UpdateWrapperDate>9/9/2022</UpdateWrapperDate>
+                <UpdateWrapperText>
+                    Det er den tid igen hvor ya boy Noel er ude med en ny opdatering til campus mad igen jk det er første gang.
+                    <br />
+                    <br />
+                    Uhh denne her opdatering er bare en udvidelse af features, som jeg tænkte ville være virkelig nemt men uhh det var det ikke helt. Anyways her er en liste af ting jeg lige kan huske jeg har gjort:
+                    <br />
+                    <b>
+                        - Bug fixes <br />
+                        - Se frem og tilbage i uger <br />
+                        - Dark mode <br />
+                        - Menu fordi der er alt for mange settings <br />
+                        - Forberedelse for konto system <br />
+                        - Version nummer <br />
+                        - Fjernet gamle ting <br />
+                        <br />
+                    </b>
+                    Du bemærker måske også at campus mad går under navnet Kridt™ da alt det her startede med at jeg ville lave en forbedret skole intra. Fremtidige løsninger, som campus mad vil have samme design stil og alle sammen være baseret om det samme konto system så det bliver et stort well... ecosystem.
+                    <br />
+                    <br />
+                    <b>Hvis i har noget feedback så uhhh send en mail til mig eller sådan noget eller måske discord idk bare tryk på feedback i menuen. <br/>THAT'S ALLLLL.... BAYBAY 👋</b>
+                </UpdateWrapperText>
+            </UpdateWrapper>
+            <UpdateWrapper>
                 <UpdateWrapperHeader>RELEASE WOWOWO</UpdateWrapperHeader>
                 <UpdateWrapperDate>24/8/2022</UpdateWrapperDate>
                 <UpdateWrapperText>
@@ -41,7 +66,7 @@ function UpdateLog() {
                 </UpdateWrapperText>
             </UpdateWrapper>
         </Wrapper>
-     );
+    );
 }
 
 const Wrapper = styled.div`
