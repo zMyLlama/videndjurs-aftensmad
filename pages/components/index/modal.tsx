@@ -16,8 +16,8 @@ function Modal(props: any) {
                 <TopWrapper>
                     <Header>{ modalData[0] }</Header>
                     <SVG onClick={() => props.setModalData([]) } width="16" height="16" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 13L13 1" stroke="#4b4d52" stroke-linecap="round"/>
-                        <path d="M13 13L1 1" stroke="#2D2F33" stroke-linecap="round"/>
+                        <path d="M1 13L13 1" stroke-linecap="round"/>
+                        <path d="M13 13L1 1" stroke-linecap="round"/>
                     </SVG>
                 </TopWrapper>
                 <Line />
@@ -26,7 +26,7 @@ function Modal(props: any) {
                 </BottomWrapper>
             </ModalWrapper>
         </Wrapper>
-     );
+    );
 }
 
 const Wrapper = styled(motion.div)`
@@ -47,6 +47,7 @@ const Wrapper = styled(motion.div)`
 
 const ModalWrapper = styled.div`
     background: #FFFFFF;
+    background-color: ${(props) => props.theme.modalBackgroundColor};
     border: 2px solid var(--border-color);
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
     border-radius: 16px;
@@ -81,8 +82,10 @@ const BottomWrapper = styled.div`
 `
 
 const Header = styled.h4`
+    color: var(--text-color);
 `
 const Text = styled.p`
+    color: var(--text-color);
     margin-top: 15px;
     @media ${device.mobileL} { font-size: 16px; }
 `
@@ -91,6 +94,7 @@ const SVG = styled.svg`
     position: absolute;
     right: 25px;
     cursor: pointer;
+    stroke: var(--detail-text-color);
 
     @media ${device.laptopL} { width: 22px; height: 22px; }
 `

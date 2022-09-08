@@ -13,6 +13,7 @@ const client = createClient({ url: process.env.REDIS_URL });
 client.connect()
 
 const addConnectionToDatabase = async function() {
+    if (process.env.BUILD_TYPE?.toLowerCase() == "development") return; 
     const userData : any = await client.json.get('data');
     client.json.set('data', '$.totalClientConnections', Number(userData["totalClientConnections"]) + 1);
 }
@@ -31,17 +32,20 @@ process.on("exit", async function(){
 
 export async function getData() {
     const userData : any = await client.json.get('data');
-    var currentdate = new Date(); 
-    var datetime = currentdate.getFullYear() + "-"
-                    + (currentdate.getMonth()+1)  + "-" 
-                    + currentdate.getDate() + " "  
-                    + currentdate.getHours() + ":"  
-                    + currentdate.getMinutes() + ":" 
-                    + currentdate.getSeconds();
-    client.json.set('data', '$.totalMealPlanReads', Number(userData["totalMealPlanReads"]) + 1);
-    client.json.set('data', '$.timeSinceLastMealPlanRead', datetime);
 
-    const data = await client.json.get('meal-plan');
+    if (process.env.BUILD_TYPE?.toLowerCase() != "development") {
+        var currentdate = new Date(); 
+        var datetime = currentdate.getFullYear() + "-"
+                        + (currentdate.getMonth()+1)  + "-" 
+                        + currentdate.getDate() + " "  
+                        + currentdate.getHours() + ":"  
+                        + currentdate.getMinutes() + ":" 
+                        + currentdate.getSeconds();
+        client.json.set('data', '$.totalMealPlanReads', Number(userData["totalMealPlanReads"]) + 1);
+        client.json.set('data', '$.timeSinceLastMealPlanRead', datetime);
+    }; 
+
+    const data = await client.json.get('meal-plan-v2');
 
     return data
 }
@@ -56,17 +60,20 @@ export async function addRating(body: any) {
             const day = weekday[yesterday]
 
             const userData : any = await client.json.get('data');
-            const mealData : any = await client.json.get('meal-plan');
+            const mealData : any = await client.json.get('meal-plan-v2');
             const Rating = mealData[day].Rating.split(",");
 
             const RatingValue = Number(Rating[0]) + Number(body);
             const RatingAmount = Number(Rating[1]) + 1;
             mealData[day].Rating = RatingValue + "," + RatingAmount;
 
-            client.json.set('data', '$.totalRatings', Number(userData["totalRatings"]) + 1)
-            client.json.set('data', '$.totalRatingsAmount', Number(userData["totalRatingsAmount"]) + Number(body));
-            client.json.set('data', '$.timeSinceLastRating', response.data.formatted);
-            await client.json.set('meal-plan', '$', mealData);
+            if (process.env.BUILD_TYPE?.toLowerCase() != "development") {
+                client.json.set('data', '$.totalRatings', Number(userData["totalRatings"]) + 1)
+                client.json.set('data', '$.totalRatingsAmount', Number(userData["totalRatingsAmount"]) + Number(body));
+                client.json.set('data', '$.timeSinceLastRating', response.data.formatted);
+            }
+            
+            await client.json.set('meal-plan-v2', '$', mealData);
 
             return "yah"
         })

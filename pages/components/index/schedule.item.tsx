@@ -6,6 +6,7 @@ interface Props {
     forceSmallestGap : any
     today: any
 }
+const weekday = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
 
 function ScheduleItem(props: any) {
     const [ itemDate, setItemDate ] = useState("Fetching...")
@@ -16,15 +17,19 @@ function ScheduleItem(props: any) {
     }
 
     const getWhenText = function() {
-        const currentDayIndex = findIndexOfKey(props.today)    
-        const todayDayIndex = findIndexOfKey(props.day); 
+        const currentDayIndex = findIndexOfKey(props.today);    
+        const todayDayIndex = findIndexOfKey(props.day);
+        console.log(props.today, props.day);
+
+        if (props.data["Week"] < props.deviceWeekNumber) return "Tidligere"
+        if (props.currentlySelectedWeek > props.deviceWeekNumber) return "Senere uge"
 
         if (props.today == props.day) return "I dag"
         if (props.index + 1 === currentDayIndex) {return "I går"} else if (props.index - 1 === currentDayIndex) {return "I morgen"}
         if (props.index + 1 < currentDayIndex) {return "Tidligere"} else if (props.index - 1 > currentDayIndex) {return todayDayIndex - currentDayIndex + " dage"}
     }
 
-    const getDateOfWeek = function(w: number, add: number) { //This shit dies when a leap year rolls around
+    const getDateOfWeek = function(w: number, add: number) { //This shit dies when a leap year rolls around... i think.
         const currentTime = new window.Date();
         const y = currentTime.getFullYear();
         
@@ -40,29 +45,30 @@ function ScheduleItem(props: any) {
         const finalDate = new window.Date(dateToWeek.getTime() + day).toString();
         return finalDate.split(" ")[2];
     }
+    const isToday = function() { if(props.today == props.day && props.deviceWeekNumber == props.data["Week"]) { return true } else { return false } }
 
     useEffect(() => {
-        setItemDate(getDateOfWeek(props.data["Week"], props.index - 1))
-    }, []);
+        setItemDate(getDateOfWeek(props.currentlySelectedWeek, props.index - 1))
+    });
 
     if (!props.data) return (<div></div>)
 
     return ( 
-        <TableRow forceSmallestGap={props.forceSmallestGap} today={ props.today == props.day ? true : false }>
+        <TableRow forceSmallestGap={props.forceSmallestGap} today={ isToday() }>
             <LeftWrapper>
                 <DayPrefix>{ props.data[props.day]["Prefix"] }</DayPrefix>
                 <Date>{ itemDate } <span style={{ color: "#888B90" }}>th</span></Date>
             </LeftWrapper>
             <MiddleWrapper>
-                <WhenWrapper today={ props.today == props.day ? true : false }>
-                    <WhenText>{ getWhenText() }</WhenText>
+                <WhenWrapper today={ isToday() }>
+                    <WhenText today={ isToday() }>{ getWhenText() }</WhenText>
                 </WhenWrapper>
             </MiddleWrapper>
             <RightWrapper>
                 <MealText>{ props.data[props.day]["Meal"] }</MealText>
             </RightWrapper>
         </TableRow>
-     );
+    );
 }
 
 const TableRow = styled.div<Props>`
@@ -72,9 +78,10 @@ const TableRow = styled.div<Props>`
     height: 130px;
     border-radius: 10px;
     background-color: ${props => props.today ? "var(--list-color)" : "var(--bg-color)"};
-    border: ${props => props.today ? "1px solid var(--border-color)" : "var(--bg-color)"};
+    border: ${props => props.today ? "2px solid var(--border-color)" : "var(--bg-color)"};
     flex-shrink: 0;
     column-gap: 80px;
+    transition: var(--transition-time);
 
     padding-left: 25px;
     padding-right: 25px;
@@ -88,7 +95,7 @@ const TableRow = styled.div<Props>`
     @media ${device.mobileL} { 
         height: 85px;
         column-gap: ${props => props.forceSmallestGap ? "5px" : "20px"};
-     }
+    }
 `
 
 const LeftWrapper = styled.div`
@@ -120,10 +127,12 @@ const RightWrapper = styled.div`
 `
 
 const DayPrefix = styled.h1`
+    color: var(--text-color);
     @media ${device.tablet} { font-size: 38px; }
     @media ${device.mobileL} { font-size: 30px; }
 `
 const Date = styled.h4`
+    color: var(--text-color);
     @media ${device.tablet} { font-size: 20px; }
     @media ${device.mobileL} { font-size: 18px; }
 `
@@ -141,7 +150,7 @@ const WhenWrapper = styled.div<Pick<Props, 'today'>>`
     border-radius: 10px;
     width: fit-content;
     height: 35px;
-    background-color: ${props => props.today ? "var(--attention-color)" : "var(--icon-color)"};
+    background-color: ${props => props.today ? props.theme.selectedScheduleItemBackground : "var(--icon-color)"};
 
     animation-name: ${props => props.today ? 'none' : "none"};
     animation-duration: 3s;
@@ -151,8 +160,9 @@ const WhenWrapper = styled.div<Pick<Props, 'today'>>`
     @media ${device.mobileL} { height: 22px; border-radius: 5px; }
 `
 
-const WhenText = styled.h6`
+const WhenText = styled.h6<Pick<Props, 'today'>>`
     color: white;
+    color: ${props => props.today ? props.theme.selectedScheduleItemText : "white"};
     font-weight: bold;
     margin-left: 20px;
     margin-right: 20px;
@@ -164,6 +174,7 @@ const WhenText = styled.h6`
 `
 
 const MealText = styled.h6`
+    color: var(--text-color);
     @media ${device.tablet} { font-size: 16px; }
     @media ${device.mobileL} { font-size: 13px; }
 `
