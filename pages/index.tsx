@@ -67,7 +67,6 @@ function Home() {
     weekday[date.getDay()] == "Sunday" ? weekNumberResult -= 1 : null; // De satans amerikanere.
     setWeekNumber(weekNumberResult);
     setCurrentlySelectedWeek(weekNumberResult);
-    setCurrentlySelectedWeek(36)
 
     /*
       Checks the cookies to see if it should display an announcement
