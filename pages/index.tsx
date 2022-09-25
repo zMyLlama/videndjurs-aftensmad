@@ -93,7 +93,7 @@ function Home() {
 
       const result = await res.json();
       setData(result);
-      setIsLoading(false);
+      //setIsLoading(false);
     }
     fetchData();
   }, []);
@@ -109,10 +109,17 @@ function Home() {
 
   const [preCalculatedRandomValue, setPreCalculatedRandomValue] = useState(0);
   if (isLoading) return (
-    <LoaderWrapper> 
+    <LoaderWrapper>
       <GlobalStyles theme={theme} />
-      <SyncLoader color={theme === "light" ? "black" : "white"} /> 
-      <LoadingDisclaimer style={{ textAlign: 'center', paddingLeft: '15px', paddingRight: '15px' }}><strong>BETA:</strong> hvis du har loadet i lang nok tid til at se denne besked så er der med { preCalculatedRandomValue }% sikkerhed et problem i databasen. Kom tilbage om et par timer eller i morgen hvor det med højst sandsynlighed er fixet.<br/><br/><span className="tiny">Det kan også være dit internet bare er lort... 😬</span></LoadingDisclaimer>
+      <Title>FEJL</Title>
+      <Paragraph>
+        Forestil dig dette scenarie. Du sidder klokken et om natten og har lige bemærket at campus mad har en kritisk fejl... <br /> Du tænker til dig selv at du nok burde fikse det, men du har jo skole i morgen, så hvad vælger du? <br /> Det nemlig rigtigt, du går i seng. Hjemmesiden er oppe at køre igen senere i dag.
+      </Paragraph>
+      { /*<LoaderWrapper> 
+        <GlobalStyles theme={theme} />
+        <SyncLoader color={theme === "light" ? "black" : "white"} /> 
+        <LoadingDisclaimer style={{ textAlign: 'center', paddingLeft: '15px', paddingRight: '15px' }}><strong>BETA:</strong> hvis du har loadet i lang nok tid til at se denne besked så er der med { preCalculatedRandomValue }% sikkerhed et problem i databasen. Kom tilbage om et par timer eller i morgen hvor det med højst sandsynlighed er fixet.<br/><br/><span className="tiny">Det kan også være dit internet bare er lort... 😬</span></LoadingDisclaimer>
+      </LoaderWrapper> */ }
     </LoaderWrapper>
   )
 
@@ -184,6 +191,17 @@ function Home() {
     </ThemeProvider>
   );
 }
+
+const Title = styled.h1`
+  color: var(--text-color);
+`
+
+const Paragraph = styled.p`
+  text-align: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: var(--text-color);
+`
 
 const LoaderWrapper = styled.div`
   position: fixed;
