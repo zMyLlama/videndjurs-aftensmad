@@ -9,13 +9,13 @@ function Account() {
                 <h4>Opret konto</h4>
                 <Paragraph style={{ marginBottom: "20px" }}>Opet en konto for at komme i gang</Paragraph>
                 <form action="/api/getData">
-                    <Label for="email">Email (valgfri):</Label><br />
+                    <Label >Email (valgfri):</Label><br />
                     <Input type="email" id="email" name="email" /><br />
-                    <Label for="username">Brugernavn:</Label><br />
+                    <Label >Brugernavn:</Label><br />
                     <Input type="text" id="username" name="username" /><br />
-                    <Label for="password">Adgangskode:</Label><br />
+                    <Label >Adgangskode:</Label><br />
                     <Input type="password" id="password" name="password" /><br />
-                    <Label for="repeat-password">Gentag adgangskode:</Label><br />
+                    <Label >Gentag adgangskode:</Label><br />
                     <Input type="password" id="repeat-password" name="repeat-password" /><br />
                     <Button disabled={false} type="submit" value="Opret konto" />
                     <SwitchToLogin>Jeg har allerede en konto</SwitchToLogin>
