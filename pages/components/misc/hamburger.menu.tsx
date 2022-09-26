@@ -84,7 +84,7 @@ function HamburgerMenu(props: any) {
                                 }) 
                             }
 
-                            <HamburgerVersion version="Version 2.0.0" />
+                            <HamburgerVersion version="Version 2.1.0" />
                             <Producer>Kridt™</Producer>
                         </MenuWrapper>
                     </HideWrapper>
