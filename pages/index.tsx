@@ -37,7 +37,7 @@ function Home() {
   const [ currentlySelectedWeek, setCurrentlySelectedWeek ] = useState(0);
   const [ today, setToday ] = useState("Fetching date from local device...");
   const [ allowRating, setAllowRating ] = useState(true);
-  const [ modalData, setModalData ] = useState(arr);
+  const [ modalData, setModalData ] = useState(["Sworry", ["I har måske bemærket at siden går ned hver mandag, det er pågrund af en bug... anywhos så bliver det fikset i version 3.0.0 der kommer ud efter efterårsferien.", <br/>, <br/>, "Denne besked bliver fjernet sån Onsdag eller sådan noget."]]);
   
   const [ announcementVisible, setAnnouncementVisible ] = useState(false);
   const announcementKey : string = "version-2.0.0"
