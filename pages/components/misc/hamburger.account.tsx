@@ -1,19 +1,43 @@
 import styled from "styled-components"
 
-function HamburgerAccount() {
+function HamburgerAccount(props : any) {
+    const getGreetingsMessage = function() {
+        const today = new Date();
+        const hours = today.getHours();
+
+        if (hours < 10 && hours > 4) {
+            return "Godmorgen, "
+        } else if (hours < 13 && hours >= 10) {
+            return "God formiddag, "
+        } else if (hours < 17 && hours >= 13) {
+            return "God eftermiddag, "
+        } else {
+            return "Godaften, "
+        }
+    }
+
     return ( 
         <Wrapper>
             <Grid>
-                <ProfilePicture className='grid-row-span-2'></ProfilePicture>
-                <Name>Ingen konto</Name>
-                <Extra>Loading...</Extra>
+                { Object.keys(props.accountData).length ?
+                    <>
+                        <ProfilePicture className='grid-row-span-2'></ProfilePicture>
+                        <Name>{ getGreetingsMessage() + props.accountData.username || "Loading..." }</Name>
+                        <Extra>{ props.accountData.points || "0" } points</Extra>
+                    </>
+                :
+                    <>
+                        <ProfilePicture className='grid-row-span-2'></ProfilePicture>
+                        <Name>Ikke logget ind</Name>
+                        <ExtraLink href="/account">Tryk her for at logge ind</ExtraLink>
+                    </>
+                }
             </Grid>
         </Wrapper>
     );
 }
 
 const Wrapper = styled.div`
-    pointer-events: none;
     width: 100%;
     padding-left: 20px;
     padding-right: 20px;
@@ -38,6 +62,11 @@ const Name = styled.h6`
 `;
 const Extra = styled.p`
     color: var(--detail-text-color);
+    font-size: 16px;
+`;
+const ExtraLink = styled.a`
+    color: var(--detail-text-color);
+    cursor: pointer;
     font-size: 16px;
 `;
 

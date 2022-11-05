@@ -9,6 +9,8 @@ export const lightTheme = {
     rollCircleColor: "var(--logo-color)",
     modalBackgroundColor: "#fff",
     menuHoverItem: "#E5E5E5",
+    bgLoginColor: "#fff",
+    announcementBg: "#fff",
 }
 export const darkTheme = {
     logoTextColor: "#31C9C9",
@@ -19,6 +21,8 @@ export const darkTheme = {
     rollCircleColor: "var(--attention-color)",
     modalBackgroundColor: "var(--list-color)",
     menuHoverItem: "#11161A",
+    bgLoginColor: "#000",
+    announcementBg: "#000",
 }
 
 const lightMode = `

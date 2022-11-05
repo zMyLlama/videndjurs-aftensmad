@@ -1,9 +1,8 @@
 import styled, { keyframes, ThemeProvider } from "styled-components";
 import Head from 'next/head'
-import Image from 'next/image'
 import { useState, useEffect } from "react";
 import { AnimatePresence, filterProps } from "framer-motion"
-import { device, fakeData } from "../js/devices";
+import { device } from "../js/devices";
 import { lightTheme, darkTheme, GlobalStyles } from "../js/themes.js";
 
 import Status from "./components/index/index.status";
@@ -30,9 +29,8 @@ type unknownData = {
 function Home() {
   const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   const arr: any[] = [];
-  const dataArr: unknownData[] = [];
+  const emptyData: unknownData[] = [];
 
-  const [ theme, setTheme ] = useState("light");
   const [ weekNumber, setWeekNumber ] = useState(0);
   const [ currentlySelectedWeek, setCurrentlySelectedWeek ] = useState(0);
   const [ today, setToday ] = useState("Fetching date from local device...");
@@ -40,10 +38,17 @@ function Home() {
   const [ modalData, setModalData ] = useState(arr);
   
   const [ announcementVisible, setAnnouncementVisible ] = useState(false);
-  const announcementKey : string = "version-2.0.0"
+  const announcementKey : string = "version-3.0.0"
 
-  const [ data, setData ] = useState(dataArr);
+  const [ data, setData ] = useState(emptyData);
+  const [ accountData, setAccountData ] = useState(emptyData);
   const [ isLoading, setIsLoading ] = useState(true);
+  const [ theme, setTheme ] = useState("light");
+
+  const themeToggle = function() {
+    theme === "light" ? setTheme("dark") : setTheme("light");
+    localStorage.setItem("theme", theme === "light" ? "dark" : "light");
+  }
 
   useEffect(() => {
     setPreCalculatedRandomValue(Math.random() * (99 - 70) + 70);
@@ -59,7 +64,7 @@ function Home() {
 
     date = new Date();
     setToday(weekday[date.getDay()]);
-    
+      
     startDate = new Date(date.getFullYear(), 0, 1);
     const days = Math.floor((date - startDate) /
         (24 * 60 * 60 * 1000));
@@ -73,12 +78,36 @@ function Home() {
     */
     const cookies = document.cookie.split(";");
     var exists : boolean = false;
+    var cookieHash : any;
     cookies.map((key) => {
         if (key.split("=")[0].toString() == announcementKey || key.split("=")[0].toString() == " " + announcementKey) {
-            exists = true;
+          exists = true;
+        } else if (key.split("=")[0].toString() == ".HASHKEY" || key.split("=")[0].toString() == " .HASHKEY") {
+          cookieHash = key.split("=")[1].toString();
         }
     })
     if (!exists) { setAnnouncementVisible(true); }
+
+    /*
+      Function that gets user login data
+    */
+    const handleLogin = async function() {
+      if (!cookieHash) return;
+      cookieHash = cookieHash.split("_")[2];
+      
+      const res = await fetch(getHostName() + "/api/loginWithHash?hash=" + cookieHash, {
+        headers: {
+        'CONTENT_TYPE': 'application/json',
+        },
+        method: 'GET',
+      })
+
+      const resJson = await res.json();
+      if (resJson.message === "OK") {
+        setAccountData(resJson.data);
+      };
+    }
+    handleLogin();
 
     /*
       Function that fetchs the data on the client and populates the client with it.
@@ -102,14 +131,9 @@ function Home() {
     setCurrentlySelectedWeek(currentlySelectedWeek + Value);
   }
 
-  const themeToggle = function() {
-    theme === "light" ? setTheme("dark") : setTheme("light");
-    localStorage.setItem("theme", theme === "light" ? "dark" : "light");
-  }
-
   const [preCalculatedRandomValue, setPreCalculatedRandomValue] = useState(0);
-  if (isLoading) return (
-    <LoaderWrapper> 
+  if (isLoading || !Object.keys(data).length) return (
+    <LoaderWrapper>
       <GlobalStyles theme={theme} />
       <SyncLoader color={theme === "light" ? "black" : "white"} /> 
       <LoadingDisclaimer style={{ textAlign: 'center', paddingLeft: '15px', paddingRight: '15px' }}><strong>BETA:</strong> hvis du har loadet i lang nok tid til at se denne besked så er der med { preCalculatedRandomValue }% sikkerhed et problem i databasen. Kom tilbage om et par timer eller i morgen hvor det med højst sandsynlighed er fixet.<br/><br/><span className="tiny">Det kan også være dit internet bare er lort... 😬</span></LoadingDisclaimer>
@@ -150,7 +174,7 @@ function Home() {
           { /* <SwitchTheme onClick={themeToggle}>
             <Image src={ theme === "light" ? "/Moon.png" : "/Sun.png" } alt="Status Symbol" layout="fill" />
           </SwitchTheme> */ }
-          <HamburgerMenu themeToggle={themeToggle} setModalData={setModalData} />
+          <HamburgerMenu accountData={accountData} themeToggle={themeToggle} setModalData={setModalData} />
         </TopWrapper>
     
         <SupposedWeek>Nuværende madplan er for uge { data["Editor" as unknown as number][currentlySelectedWeek]["Week"] }</SupposedWeek>
@@ -328,7 +352,7 @@ const SideAccent = styled.div`
 
   @media ${device.laptopS} {
     top: 0;
-    left: 0;
+    right: 0;
     width: 100%;
     height: 50px;
     background: linear-gradient(268.89deg, #FF9877 0%, #FF8A65 36.83%, #FF7E55 99.59%);

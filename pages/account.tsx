@@ -1,121 +1,167 @@
-import styled from "styled-components"
+import toast, { Toaster } from 'react-hot-toast';
+import { useState, useEffect } from "react";
+import styled, { ThemeProvider } from "styled-components"
+import { motion, useAnimationControls } from "framer-motion";
+import { device, fakeData } from "../js/devices";
 import { lightTheme, darkTheme, GlobalStyles } from "../js/themes.js";
 
+import SignUp from "./components/account/sign.up";
+import Login from "./components/account/login";
+import BarLoader from "react-spinners/BarLoader";
+
+const signUpVariants = {
+    left: { transform: "translateX(-110%)" },
+    center: { transform: "translateX(0%)" },
+}
+const loginVariants = {
+    right: { transform: "translateX(110%)" },
+    center: { transform: "translateX(0%)" },
+}
+const wrapperVariants = {
+    signup: { height: "665px", transform: "translateY(0%)" },
+    login: { height: "550px", transform: "translateY(0%)" },
+    hidden: { transform: "translateY(200%)", transition: { duration: 0.5 } },
+    transition: { height: "100vh", width: "100%", transition: { duration: 0.35 } },
+}
+
+const loaderVariants = {
+    hidden: { transform: "translateY(-100vh)" },
+    show: { transform: "translateY(-0vh)", transition: { duration: 1.3, ease: [0.33, 1, 0.68, 1] } },
+}
+
 function Account() {
-    return ( 
-        <Wrapper>
-            <GlobalStyles theme={"light"} />
-            <Form>
-                <h4>Opret konto</h4>
-                <Paragraph style={{ marginBottom: "20px" }}>Opet en konto for at komme i gang</Paragraph>
-                <form action="/api/getData">
-                    <Label >Email (valgfri):</Label><br />
-                    <Input type="email" id="email" name="email" /><br />
-                    <Label >Brugernavn:</Label><br />
-                    <Input type="text" id="username" name="username" /><br />
-                    <Label >Adgangskode:</Label><br />
-                    <Input type="password" id="password" name="password" /><br />
-                    <Label >Gentag adgangskode:</Label><br />
-                    <Input type="password" id="repeat-password" name="repeat-password" /><br />
-                    <Button disabled={false} type="submit" value="Opret konto" />
-                    <SwitchToLogin>Jeg har allerede en konto</SwitchToLogin>
-                    <Paragraph style={{ marginTop: "20px" }}>Hvis du vil læse mere omkring hvordan vi håndtere dine oplysninger så <Highlight>klik her</Highlight></Paragraph>
-                </form>
-            </Form>
-        </Wrapper>
+    const [ theme, setTheme ] = useState("dark");
+    const [ loaderText, setLoaderText ] = useState("Vent venligst...");
+
+    const signUpControls = useAnimationControls();
+    const loginControls = useAnimationControls();
+    const wrapperControls = useAnimationControls();
+    const loaderControls = useAnimationControls();
+
+    useEffect(() => {
+        localStorage.getItem("theme")
+        setTheme(localStorage.getItem("theme") ? localStorage.getItem("theme") as string : "light");
+    }, [])
+
+    const SwitchToLogin = function() {
+        signUpControls.start("left");
+        loginControls.start("center");
+        wrapperControls.start("login");
+    }
+
+    const SwitchToSignup = function() {
+        signUpControls.start("center");
+        loginControls.start("right");
+        wrapperControls.start("signup");
+    }
+
+    return (
+        <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+            <Background>
+                <GlobalStyles theme={theme} />
+                <Loader
+                    initial={"hidden"}
+                    animate={loaderControls}
+                    variants={loaderVariants}
+                >
+                    <BarLoader width="250px" color={theme === "light" ? "#000000" : "#ffffff"} />
+                    <h4 style={{ marginTop: "15px", fontWeight: "500", textAlign: "center" }}>{ loaderText }</h4>
+                </Loader>
+                
+                <Wrapper
+                    initial={"login"}
+                    transition={{ ease: "easeOut", duration: 0.3 }}
+                    animate={wrapperControls}
+                    variants={wrapperVariants}
+                >
+                    <SignupForm
+                        initial={"left"}
+                        transition={{ ease: "easeOut", duration: 0.3 }}
+                        animate={signUpControls}
+                        variants={signUpVariants}
+                    >
+                        <SignUp 
+                            signUpControls={signUpControls} 
+                            setLoaderText={setLoaderText} 
+                            loaderControls={loaderControls} 
+                            wrapperControls={wrapperControls} 
+                            SwitchToLogin={SwitchToLogin} 
+                        />
+                    </SignupForm>
+
+                    <LoginForm
+                        initial={"center"}
+                        transition={{ ease: "easeOut", duration: 0.3 }}
+                        animate={loginControls}
+                        variants={loginVariants}
+                    >
+                        <Login
+                            loginControls={loginControls} 
+                            setLoaderText={setLoaderText} 
+                            loaderControls={loaderControls} 
+                            wrapperControls={wrapperControls} 
+                            SwitchToSignup={SwitchToSignup} 
+                        />
+                    </LoginForm>
+                </Wrapper>
+            </Background>
+            <Toaster />
+        </ThemeProvider>
     );
 }
 
-const Wrapper = styled.div`
+const Background = styled.div`
     background-color: var(--bg-color);
     height: 100vh;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
 `
 
-const Paragraph = styled.p`
-    font-size: 16px;
-    color: var(--detail-text-color);
-`
-
-const Highlight = styled.span`
-    font-weight: bold;
-    cursor: pointer;
-`
-
-const SwitchToLogin = styled.a`
-    text-decoration: underline;
-    cursor: pointer;
-    margin: auto;
-`
-
-const Label = styled.label`
-    font-size: 16px;
-`
-
-const Input = styled.input`
-    all: unset;
-    box-sizing: border-box;
-    width: 100%;
-    height: 35px;
-    border: 1px solid var(--border-color);
-    margin-bottom: 10px;
-    border-radius: 5px;
-
-    padding-left: 10px;
-    padding-right: 10px;
-`
-
-const Button =  styled.input`
-    all: unset;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: var(--logo-color);
-    width: 100%;
-    border-radius: 5px;
-    margin-top: 10px;
-    cursor: pointer;
-
-    color: white;
-    font-weight: 600;
-    text-align: center;
+const Loader = styled(motion.div)`
+    position: absolute;
+    width: 400px;
+    height: 300px;
 
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    outline-offset: 0px;
-    outline: solid 5px transparent;
-    transition: var(--transition-time);
-
-    &:hover {
-        opacity: 0.9;
-    }
-
-    &:focus-visible {
-        outline-offset: 4px;
-        outline: solid 5px var(--attention-color);
-    }
-
-    &:disabled {
-        opacity: 0.3;
-        cursor: not-allowed;
-    }
 `
 
-const Form = styled.div`
-    padding: 20px;
+const Wrapper = styled(motion.div)`
+    position: relative;
+    overflow: hidden;
     width: 400px;
     height: 600px;
+
+    background-color: ${(props) => props.theme.bgLoginColor};
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
+`
+
+const SignupForm = styled(motion.div)`
+    position: absolute;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
 
     display: flex;
     justify-content: center;
     flex-direction: column;
+`
 
-    background-color: white;
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
+const LoginForm = styled(motion.div)`
+    position: absolute;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 `
 
 export default Account;

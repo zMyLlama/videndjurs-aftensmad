@@ -29,6 +29,36 @@ function UpdateLog() {
 
             <UpdateHeader>Update log <span className="tiny">i literally hard coded this... 💀</span></UpdateHeader>
             <UpdateWrapper>
+                <UpdateWrapperHeader>UPDATE TREE 🌳</UpdateWrapperHeader>
+                <UpdateWrapperDate>3/10/2022</UpdateWrapperDate>
+                <UpdateWrapperText>
+                    Guess who's back... that's right det er Noel...... ok anyways her er stuff omkring opdatering 3.0.0.
+                    <br />
+                    <br />
+                    Det her er den største opdatering jeg har lavet til Campus Mad og den har været utrolig sjov at lave men uhhh det blev så sjovt for mig at jeg skubbede vigtigere pligter til side for at arbejde på den, som jo ikke er særlig godt...
+                    <br />
+                    Jeg bliver nok nødt til at stoppe med at opdatere på campus mad i et stykke tid da jeg skal fokusere på arbejde, som jeg jo faktisk bliver betalt for. <b>(Jeg kommer stadig  til at opdatere madplanen)</b>
+                    <br />
+                    <br />
+                    Jeg tvivler på der er en sjæl der læser dem her da det er lidt ligesom at læse Terms of service... thats right det er der literally ingen der gør, MEN i tilfælde af at der er en eller anden techie der læser det vil jeg nu beskrive alle de sjove ting jeg gik igennem for at lave denne opdatering.
+                    <br />
+                    - Uhh vi har sådan en fin ting der hedder GDPR, som jeg blev nødt til at læse op på da vi nu har kontoer. Jeg skulle selv mene at vi opfylder deres krav så ingen worries der.
+                    <br />
+                    - Det var meget sjovt at lave konto systemet sikkert. Som man kan se når du opretter en konto eller logger ind bliver du verificeret med cloudflare, det sikrer basically at du ikke kan bruteforce et password.
+                    <br />
+                    - Du kan altid prøve at bruteforce en hash 💀. Jeg bruger SHA-256 til at hashe dem. /api/loginWithHash?hash={ "{yourHashHere}" }
+                    <br />
+                    - Holy fuck den der gradient der er på det der intro card for den nye opdatering var så fucking besværlig, men holy fuck den så godt ud. Jeg ville gerne have at den ligesom startede og så spredte sig uden fra midten af, men siden gradienten var et billede blev jeg nødt til at bruge et mask-image og så animere position og størrelse af det der mask-image, det tog bare rimelig lang tid at komme fren til den løsning.
+                    <br />
+                    - Hele pulje spillet afhænger af dig yes sir. Da vi ikke har en server kan jeg ikke schedule funktioner så du er min scheduler. Når du logger ind på hjemmesiden bruger den dig til at opdatere spillet... rimelig crazy og jeg tror aldrig jeg kommer til at sætte pris på datoer igen.
+                    <br />
+                    <br />
+                    <b>Anyways det var sån lige det vigtigte og sådan noget. Der er virkelig meget mere, men så ville jeg altså hellere bruge min tid på at skrive Dansk lektier end en teknisk beskrivelse, som literally ingen læser. Hvis i virkelig gerne vil høre mere eller har noget feedback så bare brug kontakt måderne i menuen under Feedback.</b>
+                    <br />
+                    <b>Thats all MISTER 🤓</b>
+                </UpdateWrapperText>
+            </UpdateWrapper>
+            <UpdateWrapper>
                 <UpdateWrapperHeader>UPDATE TWOWOO</UpdateWrapperHeader>
                 <UpdateWrapperDate>9/9/2022</UpdateWrapperDate>
                 <UpdateWrapperText>

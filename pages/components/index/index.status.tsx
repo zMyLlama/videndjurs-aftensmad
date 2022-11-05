@@ -19,7 +19,7 @@ function Status(props: any) {
 
     const getStatusDescriptionMessage = function() {
         if (props.data["Week"] == props.deviceWeek) {
-            return "Hvis der er problemer med madplanen så kontakt os med linket i bunden 👇";
+            return "Hvis der er problemer med madplanen så kontakt os gennem menuen 💪";
         } else if (props.selectedWeek > props.deviceWeek ) {
             return "Der kan ske ændringer i madplanen da den er fra fremtiden 🤓";
         } else if (!props.fullDataSet[props.deviceWeek]) {

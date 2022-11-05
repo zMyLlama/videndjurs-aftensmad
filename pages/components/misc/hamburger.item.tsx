@@ -12,7 +12,7 @@ function HamburgerItem(props: any) {
         } else if (props.type.toLowerCase() === "hyperlink") {
             window.location.href = props.parameter;
         } else if (props.type.toLowerCase() === "theme") {
-            props.execute();
+                props.themeToggle();
         }
     }
 

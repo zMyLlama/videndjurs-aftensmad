@@ -6,8 +6,10 @@ import Script from 'next/script'
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <React.Fragment>
-      {/* Global Site Tag (gtag.js) - Google Analytics */}
+      { /* Cloudflare Verfification Integration */ }
+      <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy='lazyOnload' />
 
+      {/* Global Site Tag (gtag.js) - Google Analytics */}
       { process.env.NEXT_PUBLIC_BUILD_TYPE?.toLowerCase() === "production" ?
         <Script
           strategy="lazyOnload"

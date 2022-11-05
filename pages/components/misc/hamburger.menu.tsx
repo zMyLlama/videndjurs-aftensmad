@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components"
 import { motion, AnimatePresence } from "framer-motion";
 import { device } from "../../../js/devices"
@@ -23,9 +23,10 @@ const lineThreeVariants = {
 }
 
 function HamburgerMenu(props: any) {
-    const navigationItems = [
+    const [navigationItems, setNavigationItems] = useState([
         ["Line"],
         ["Madplan", "/madplan.svg", "Hyperlink", false, "/"], 
+        ["Leaderboard", "/leaderboard.svg", "Hyperlink", false, "/leaderboard"],
         ["Opdaterings log", "/opdateringlog.svg", "Hyperlink", false, "/update-log"], 
         ["Line"],
         ["Feedback", "/feedback.svg", "Function", props.setModalData, ["Feedback", ["Jeg orker ikke rigtig lave en kontakt form så bare skriv til mig gennem følgende veje:", <br/>,<br/>, <strong>Mail: noelgamsboel@gmail.com</strong>, <br/>, <strong>Telefon: +45 40494657</strong>, <br/>, <strong>Discord: zMyLlama#3455</strong> ]]], 
@@ -33,12 +34,38 @@ function HamburgerMenu(props: any) {
         ["Line"],
         ["Skift tema", "/tema.svg", "Theme", props.themeToggle],
         ["Line"],
-        ["Log ind", "/login.svg", "Function", props.setModalData, ["Another one", [<strong>WHAT NO WAY ENDNU EN UPCOMING FEATURE!</strong>, <br/>,<br/>, "Du tænker nok at det er lidt i overkanten med et konto system og det har du fuldkommen ret i, derfor behøver du selvfølgelig ikke at have en, det er blot et tilbud.", <br/>, "Konto systemet kommer til at blive brugt i fremtidige løsninger fra ", <strong>Kridt™</strong>, " og til validering af anmeldelser... nok også noget mere.", <br/>,<br/>, <strong>Uhh denne feature kommer nok ud i sån version 3.0.0 eller 4.0.0, idk.</strong> ]]],
+        ["Log ind", "/login.svg", "Hyperlink", false, "/account" ],
         ["Line"],
-    ];
+    ]);
 
     const selected : any = props.selected || "Madplan" as any;
     const [ isVisible, setIsVisible ] = useState(false);
+
+    useEffect(() => {
+        const asyncHandler = async function() {
+            if (!Object.keys(props.accountData).length) return;
+
+            // If this is executed then its because we are switching to login
+            do {
+                if (typeof navigationItems == "string") continue;
+                var newNavigationItems : any = navigationItems;
+                await newNavigationItems.pop();
+                await setNavigationItems(newNavigationItems);
+            } while (navigationItems[navigationItems.length - 1][0] === "Line" || navigationItems[navigationItems.length - 1][0] === "Log ind" || navigationItems[navigationItems.length - 1][0] === "Log ud")
+
+            var newNavigationItems : any = navigationItems;
+            await newNavigationItems.push(["Line"]);
+            await newNavigationItems.push(["Log ud", "/log-out.svg", "Function", logout, "" ]);
+            await newNavigationItems.push(["Line"]);
+            setNavigationItems(newNavigationItems);
+        }
+        asyncHandler();
+    });
+
+    const logout = function() {
+        document.cookie = ".HASHKEY=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        window.location.href = "/account";
+    }
 
     const toggleMenu = function() {
         isVisible ? setIsVisible(false) : setIsVisible(true);
@@ -72,14 +99,14 @@ function HamburgerMenu(props: any) {
                         animate={{ height: "calc(100vh - 125px)" }}
                     >
                         <MenuWrapper>
-                            <HamburgerAccount />
+                            <HamburgerAccount accountData={props.accountData} />
                             
                             {
                                 Object.values(navigationItems).map((value, index) => {
                                     if (value[0] == "Line") {
                                         return <Line />
                                     } else {
-                                        return <HamburgerItem text={value[0]} svg={value[1]} isSelected={selected === value[0] ? true : false} type={value[2]} execute={value[3]} parameter={value[4]} />
+                                        return <HamburgerItem themeToggle={props.themeToggle} text={value[0]} svg={value[1]} isSelected={selected === value[0] ? true : false} type={value[2]} execute={value[3]} parameter={value[4]} />
                                     }
                                 }) 
                             }
@@ -131,6 +158,7 @@ const MenuWrapper = styled.div`
     align-items: center;
 
     overflow-y: scroll;
+    pointer-events: auto;
 
     @media ${device.anythingAboveTablet} {
         width: 550px;
@@ -146,6 +174,8 @@ const HideWrapper = styled(motion.div)`
     top: 115px;
     margin: auto;
     overflow-y: hidden;
+
+    pointer-events: none;
 
     @media ${device.anythingAboveTablet} {
         width: 550px;

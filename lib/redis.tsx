@@ -51,7 +51,7 @@ export async function getData() {
 }
 
 export async function addRating(body: any) {
-    if (Number(body) > 4 && Number(body) < 0) return "muhahahahahhaha... foolish boy";
+    if (Number(body) > 4 || Number(body) < 0) return "muhahahahahhaha... foolish boy";
 
     await axios.get(process.env.TIMEZONE_URL)
         .then(async function (response : any) {
@@ -82,4 +82,23 @@ export async function addRating(body: any) {
         })
 
     return "probably worked... idk cant be bothered to make a check"
+}
+
+export async function updateGame(body : any) {
+    const date = await axios.get(process.env.TIMEZONE_URL);
+    const gameData : any = await client.json.get('pulje_game');
+    const durationInSeconds = (gameData.Time - date.data.timestamp);
+    let hours : any = durationInSeconds / 3600;
+    let mins : any = (durationInSeconds % 3600) / 60;
+    let secs : any = (mins * 60) % 60;
+    hours = Math.trunc(hours); mins = Math.trunc(mins); secs = Math.trunc(secs);
+
+    if (hours.toString().length == 1) { hours = "0" + (hours.toString()) }
+    if (mins.toString().length == 1) { mins = "0" + (mins.toString()) }
+    if (secs.toString().length == 1) { secs = "0" + (secs.toString()) }
+
+    const timestamp = hours + ":" + mins + ":" + secs;
+    const pointsInGame = Math.trunc(Math.pow(2, gameData.Participants.length) - 1);
+    
+    return {message: "OK", serverTimestamp: timestamp, seconds: durationInSeconds, participants: gameData.Participants.length, points: pointsInGame}
 }
