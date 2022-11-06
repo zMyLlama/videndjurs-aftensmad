@@ -84,21 +84,68 @@ export async function addRating(body: any) {
     return "probably worked... idk cant be bothered to make a check"
 }
 
+export async function castGameParticipation(body : any) {
+
+}
+
+export async function claimWin(body : any) {
+
+}
+
 export async function updateGame(body : any) {
-    const date = await axios.get(process.env.TIMEZONE_URL);
+    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+    const dateData = await axios.get(process.env.TIMEZONE_URL);
+    const formattedYesterdayDate : any = new Date(dateData.data.timestamp * 1000);
+    formattedYesterdayDate.setDate(formattedYesterdayDate.getDate() - 1);
+    const startDate : any = new Date(formattedYesterdayDate.getFullYear(), 0, 1);
+    var days = Math.floor((formattedYesterdayDate - startDate) /
+        (24 * 60 * 60 * 1000));
+    var weekNumber = Math.ceil(days / 7);
+    var yesterdayDay = weekday[formattedYesterdayDate.getDay()];
+
     const gameData : any = await client.json.get('pulje_game');
-    const durationInSeconds = (gameData.Time - date.data.timestamp);
+    const durationInSeconds = (gameData.Time - dateData.data.timestamp);
     let hours : any = durationInSeconds / 3600;
     let mins : any = (durationInSeconds % 3600) / 60;
     let secs : any = (mins * 60) % 60;
-    hours = Math.trunc(hours); mins = Math.trunc(mins); secs = Math.trunc(secs);
 
+    hours = Math.trunc(hours); mins = Math.trunc(mins); secs = Math.trunc(secs);
     if (hours.toString().length == 1) { hours = "0" + (hours.toString()) }
     if (mins.toString().length == 1) { mins = "0" + (mins.toString()) }
     if (secs.toString().length == 1) { secs = "0" + (secs.toString()) }
-
     const timestamp = hours + ":" + mins + ":" + secs;
     const pointsInGame = Math.trunc(Math.pow(2, gameData.Participants.length) - 1);
+
+    if (durationInSeconds <= 0 ) {
+        var mealPlan : any = await client.json.get('meal-plan-v2');
+        mealPlan = mealPlan["Editor"][weekNumber][yesterdayDay];
+        await gameData.Participants.sort((a : any, b : any) => {
+            var firstRating = Math.abs(mealPlan.Rating.Amount - a[1]);
+            var secondRating = Math.abs(mealPlan.Rating.Amount - b[1]);
+
+            if (Math.min(firstRating, secondRating) == firstRating) {
+                return -1
+            } else {
+                return 1
+            }
+        });
+        
+        var usersData : any = await client.HGETALL("users_data");
+        [0,1,2].map(index => {
+            var userData = JSON.parse(usersData[gameData.Participants[index][0]]);
+            userData["Points"] += Math.trunc(pointsInGame / 3);
+            if (userData["DidWin"] != -1) { // If this is the case then the user has won multiple games without being on the site to claim. This should technically not be possible.
+                userData["DidWin"] += userData["Points"]
+            } else {
+                userData["DidWin"] = userData["Points"];
+            }
+            
+            usersData[gameData.Participants[index][0]] = JSON.stringify(userData);
+        })
+
+        console.log(usersData);
+    }
     
     return {message: "OK", serverTimestamp: timestamp, seconds: durationInSeconds, participants: gameData.Participants.length, points: pointsInGame}
 }

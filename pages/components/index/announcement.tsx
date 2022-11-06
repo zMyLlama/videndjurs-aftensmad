@@ -26,7 +26,7 @@ function Announcement(props: any) {
         0: {
             "Title": "Opdatering 3.0.0",
             "Description": "Den største opdatering til Campus Mad... Nogensinde!\n\nFortsæt for at se alle de nye features.",
-            "ButtonText": "Næste",
+            "ButtonText": "Fortsæt",
             "ButtonFunction": nextPage,
             "src": "/Announcement/AnnouncementLogo.png",
         },
@@ -52,6 +52,13 @@ function Announcement(props: any) {
             "src": "/Announcement/AnnouncementGame.png",
         },
         4: {
+            "Title": "Alerts",
+            "Description": "Med alerts vil de stå (ligesom breaking news på tv2) oppe i toppen af din skærm.\n\nIngen irriterende popups længere.",
+            "ButtonText": "Næste",
+            "ButtonFunction": nextPage,
+            "src": "/Announcement/AnnouncementAlert.png",
+        },
+        5: {
             "Title": "Til sidst",
             "Description": "Jeg håber at i kommer til at bruge den nye opdatering. I kan, som altid se flere detaljer om opdateringen ved at åbne opdaterings loggen.",
             "ButtonText": "Afslut",
@@ -78,7 +85,7 @@ function Announcement(props: any) {
 
                 <Pages>
                     {
-                        [0,1,2,3,4].map(index => {
+                        [0,1,2,3,4,5].map(index => {
                             return <PageDot selected={index === currentPage} />
                         })
                     }
