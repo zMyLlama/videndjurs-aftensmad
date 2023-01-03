@@ -12,6 +12,7 @@ import RollDown from "./components/index/roll.down";
 import ReactionNotification from "./components/index/reaction-notification";
 import Modal from "./components/index/modal";
 import SyncLoader from "react-spinners/SyncLoader";
+import TempLoading from "./components/index/temp.loading";
 import HamburgerMenu from "./components/misc/hamburger.menu";
 import Announcement from "./components/index/announcement";
 
@@ -93,7 +94,7 @@ function Home() {
 
       const result = await res.json();
       setData(result);
-      setIsLoading(false);
+      //setIsLoading(false);
     }
     fetchData();
   }, []);
@@ -109,11 +110,14 @@ function Home() {
 
   const [preCalculatedRandomValue, setPreCalculatedRandomValue] = useState(0);
   if (isLoading) return (
-    <LoaderWrapper> 
+    <>
+    <TempLoading />
+    { /*<LoaderWrapper> 
       <GlobalStyles theme={theme} />
       <SyncLoader color={theme === "light" ? "black" : "white"} /> 
       <LoadingDisclaimer style={{ textAlign: 'center', paddingLeft: '15px', paddingRight: '15px' }}><strong>BETA:</strong> hvis du har loadet i lang nok tid til at se denne besked så er der med { preCalculatedRandomValue }% sikkerhed et problem i databasen. Kom tilbage om et par timer eller i morgen hvor det med højst sandsynlighed er fixet.<br/><br/><span className="tiny">Det kan også være dit internet bare er lort... 😬</span></LoadingDisclaimer>
-    </LoaderWrapper>
+  </LoaderWrapper> */}
+    </>
   )
 
   return (
