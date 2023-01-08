@@ -6,10 +6,10 @@ function TempLoading() {
         <Wrapper>
             <Header>Upsi dupsi...</Header>
             <Paragraph>
-                På grund af det nye år har hjemmesidens dato håndtering system desværre sviget, jeg var dog klar over dette til gengæld havde jeg ikke overvejet at dette også er et skudår som putter systemet i... kritisk tilstand.
+                På grund af det nye år har hjemmesidens dato håndtering system desværre sviget, jeg var dog klar over dette til gengæld havde jeg ikke overvejet at det også var et skudår sidste år som putter systemet i... kritisk tilstand.
                 <br/>
                 <br/>
-                Jeg har valgt at lukke siden ned indtil forhåbentlig den 9/1/2023 hvor hjemmesiden forhåbentlig er fikset og bliver åbnet op igen med den nyeste version. Hjemmesiden skulle have været lukket i kort tid alligevel på grund af sikkerhedsmæssige årsager med den nye opdatering, så nu kan jeg heldigvis slå to fluer med et smæk.
+                Jeg har valgt at lukke siden ned indtil forhåbentlig den 12/1/2023 hvor hjemmesiden forhåbentlig er fikset og bliver åbnet op igen med den nyeste version. Hjemmesiden skulle have været lukket i kort tid alligevel på grund af sikkerhedsmæssige årsager med den nye opdatering, så nu kan jeg heldigvis slå to fluer med et smæk.
                 <br/>
                 <br/>
                 Super mange gange tak for at i gider at bruge campusmad. Later 👋
