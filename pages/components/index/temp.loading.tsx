@@ -4,15 +4,23 @@ import { device } from "../../../js/devices"
 function TempLoading() {
     return ( 
         <Wrapper>
-            <Header>Upsi dupsi...</Header>
+            <Header>Under ombygning</Header>
             <Paragraph>
-                På grund af det nye år har hjemmesidens dato håndtering system desværre sviget, jeg var dog klar over dette til gengæld havde jeg ikke overvejet at det også var et skudår sidste år som putter systemet i... kritisk tilstand.
-                <br/>
-                <br/>
-                Jeg har valgt at lukke siden ned indtil forhåbentlig den 12/1/2023 hvor hjemmesiden forhåbentlig er fikset og bliver åbnet op igen med den nyeste version. Hjemmesiden skulle have været lukket i kort tid alligevel på grund af sikkerhedsmæssige årsager med den nye opdatering, så nu kan jeg heldigvis slå to fluer med et smæk.
-                <br/>
-                <br/>
-                Super mange gange tak for at i gider at bruge campusmad. Later 👋
+                Det vigtigste på siden er at man kan se madplanen, siden dette stadig er muligt har jeg tænkt mig at lukke siden i ukendt tid.
+                <br />
+                <br />
+                Grunden til jeg vælger og gøre dette er for at siden kan blive mere modulær og potentailt bruges af andre skoler.
+                <br />
+                Jeg skal derfor bruge tid på at forbedre koden, tilgængelighed og designet af hjemmesiden, udover dette skal jeg også integrere den med et fuldt konto system.
+                <br />
+                <br />
+                Når siden åbner op igen vil det være et krav at have en konto, udover dette vil der potentailt også være en app til android.
+                <br />
+                <br />
+                Mange tak for jeres forståelse, jeg satser på faktisk at lave den nye hjemmeside og ikke bare forsinke den forevigt. 
+                <br />
+                <br />
+                <b>- Educended</b>
             </Paragraph>
 
             <Line />
@@ -49,7 +57,7 @@ function TempLoading() {
             </List>
 
             <ErrorWrapper>
-                <Error>ERROR404</Error>
+                <Error>CONSTRUCTION</Error>
             </ErrorWrapper>
         </Wrapper>
     );
@@ -166,7 +174,7 @@ const ErrorWrapper = styled.div`
 
 const Error = styled.h1`
     font-weight: 700;
-    font-size: 21vh;
+    font-size: 14vh;
     color: #202020;
     transform: rotate(90deg);
 `
