@@ -28,31 +28,31 @@ function TempLoading() {
             <List>
                 <Item>
                     <Left>Mandag</Left>
-                    <Right>Karbonader m/kartofler og stuvet grønærter</Right>
+                    <Right>Kommer senere...</Right>
                 </Item>
                 <Item>
                     <Left>Tirsdag</Left>
-                    <Right>Kylling i karry m/ris</Right>
+                    <Right>Kommer senere...</Right>
                 </Item>
                 <Item>
                     <Left>Onsdag</Left>
-                    <Right>Fiskefrikadeller m/ovnkartofler, remoulade og gulerodsråkost</Right>
+                    <Right>Kommer senere...</Right>
                 </Item>
                 <Item>
                     <Left>Torsdag</Left>
-                    <Right>Skinkesteg m/halve kartofler og tzatziki</Right>
+                    <Right>Kommer senere...</Right>
                 </Item>
                 <Item>
                     <Left>Fredag</Left>
-                    <Right>Tortilliapandekager m/okeskød</Right>
+                    <Right>Kommer senere...</Right>
                 </Item>
                 <Item>
                     <Left>Lørdag</Left>
-                    <Right>Okseburger m/bådkartofler</Right>
+                    <Right>Kommer senere...</Right>
                 </Item>
                 <Item>
                     <Left>Søndag</Left>
-                    <Right>Svensk pølseret</Right>
+                    <Right>Kommer senere...</Right>
                 </Item>
             </List>
 
@@ -75,8 +75,9 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
 
+    overflow-y: scroll;
     @media ${device.mobileL} { 
-        overflow-y: scroll;
+        
     }
 `
 
@@ -87,8 +88,8 @@ const Header = styled.h1`
     color: #FFFFFF;
     white-space: nowrap;
 
-    @media ${device.tablet} { font-size: 60px; }
-    @media ${device.mobileL} { font-size: 50px; }
+    @media ${device.tablet} { font-size: 45px; }
+    @media ${device.mobileL} { font-size: 34px; }
 `
 
 const Paragraph = styled.p`
@@ -125,6 +126,7 @@ const List = styled.div`
     height: 100%;
     overflow-y: scroll;
 
+    min-height: 500px;
     @media ${device.mobileL} { 
         min-height: 300px;
     }
