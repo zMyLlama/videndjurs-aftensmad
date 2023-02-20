@@ -28,31 +28,31 @@ function TempLoading() {
             <List>
                 <Item>
                     <Left>Mandag</Left>
-                    <Right>Tarteletter</Right>
+                    <Right>Kommer senere...</Right>
                 </Item>
                 <Item>
                     <Left>Tirsdag</Left>
-                    <Right>Tomatsuppe med pasta</Right>
+                    <Right>Kommer senere...</Right>
                 </Item>
                 <Item>
                     <Left>Onsdag</Left>
-                    <Right>Wok med nudler</Right>
+                    <Right>Kommer senere...</Right>
                 </Item>
                 <Item>
                     <Left>Torsdag</Left>
-                    <Right>Biksemad</Right>
+                    <Right>Kommer senere...</Right>
                 </Item>
                 <Item>
                     <Left>Fredag</Left>
-                    <Right>Fiskefillet med pommes frites (Sidste måltid inden vinterferien er til aftensmad)</Right>
+                    <Right>Kommer senere...</Right>
                 </Item>
                 <Item>
                     <Left>Lørdag</Left>
-                    <Right>Vinterferie</Right>
+                    <Right>Kommer senere...</Right>
                 </Item>
                 <Item>
                     <Left>Søndag</Left>
-                    <Right>Vinterferie</Right>
+                    <Right>Kommer senere...</Right>
                 </Item>
             </List>
 
