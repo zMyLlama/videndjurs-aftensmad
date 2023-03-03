@@ -44,7 +44,7 @@ function TempLoading() {
                 </Item>
                 <Item>
                     <Left>Fredag</Left>
-                    <Right>Culottesteg m/ovnkartofler og sovs</Right>
+                    <Right>Plankesteak m/ovnkartofler og sovs</Right>
                 </Item>
                 <Item>
                     <Left>Lørdag</Left>
