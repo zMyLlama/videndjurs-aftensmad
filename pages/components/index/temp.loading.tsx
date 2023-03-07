@@ -28,31 +28,31 @@ function TempLoading() {
             <List>
                 <Item>
                     <Left>Mandag</Left>
-                    <Right>Hakkebøf m/kartofler, ærter og bearnaisesovs</Right>
+                    <Right>Stegt flæsk m/ kartofler og persillesovs</Right>
                 </Item>
                 <Item>
                     <Left>Tirsdag</Left>
-                    <Right>Chili con carne m/ris</Right>
+                    <Right>Tartelleter</Right>
                 </Item>
                 <Item>
                     <Left>Onsdag</Left>
-                    <Right>Kyllingelår på kartoffel/porrerbund</Right>
+                    <Right>Chicken korma m/ jasmin ris og brød</Right>
                 </Item>
                 <Item>
                     <Left>Torsdag</Left>
-                    <Right>Oksekødssuppe m/kød og melboller</Right>
+                    <Right>Kylling m/ ris og bernaisesovs</Right>
                 </Item>
                 <Item>
                     <Left>Fredag</Left>
-                    <Right>Plankesteak m/ovnkartofler og sovs</Right>
+                    <Right>Pitabrød med kebab</Right>
                 </Item>
                 <Item>
                     <Left>Lørdag</Left>
-                    <Right>Svinekøller m/flødekartofler</Right>
+                    <Right>Paprikagryde m/ ris</Right>
                 </Item>
                 <Item>
                     <Left>Søndag</Left>
-                    <Right>Hot wings m/kartofler og barbecuesovs</Right>
+                    <Right>Lasagne</Right>
                 </Item>
             </List>
 
