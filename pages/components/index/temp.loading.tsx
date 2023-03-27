@@ -38,8 +38,11 @@ const item = {
 
 function TempLoading() {
     const clientDate: Dayjs = dayjs();
+    console.log(clientDate);
     const weekNumber = clientDate.isoWeek();
+    console.log(weekNumber);
     const weekdayNumber = (clientDate.isoWeekday() - 1);
+    console.log(weekdayNumber);
 
     return ( 
         <Wrapper>
