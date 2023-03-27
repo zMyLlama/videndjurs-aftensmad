@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import dayjs, {Dayjs} from "dayjs";
 import isoWeek from 'dayjs/plugin/isoWeek';
 import Marquee from "react-fast-marquee";
@@ -19,6 +20,21 @@ const mealPlan : any = {
 }
 
 dayjs.extend(isoWeek);
+
+const container = {
+    hidden: { opacity: 0 },
+    show: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1,
+        }
+    }
+}
+
+const item = {
+    hidden: { opacity: 0, transform: 'translateY(20px)' },
+    show: { opacity: 1, transform: 'translateY(0px)', transition: { duration: 0.6, ease: [0.33, 1, 0.68, 1] } }
+}
 
 function TempLoading() {
     const clientDate: Dayjs = dayjs();
@@ -61,16 +77,27 @@ function TempLoading() {
                         </svg>
                     </ReadMoreButton>
                 </Left>
+                <Right>
+                    <Shot src="/WebsiteShot.png" />
+                </Right>
                 <Gradient src="/GradientBG.png" />
             </NewWrapper>
 
             <MealPlanTitle>Madplan</MealPlanTitle>
-            { Object.keys(mealPlan.meals).map((day, index) => {
-                return <MealWrapper>
-                    <MealDay style={{ backgroundColor: `${weekdayNumber === index && "#454cde"}`, color: `${weekdayNumber === index && "white"}` }}>{ translatedNames[index] }</MealDay>
-                    <Meal>{ mealPlan.meals[day] }</Meal>
-                </MealWrapper>
-            }) }
+            <motion.div
+                variants={container}
+                initial="hidden"
+                animate="show"
+            >
+                { Object.keys(mealPlan.meals).map((day, index) => {
+                    return <MealWrapper
+                        variants={item}
+                    >
+                        <MealDay style={{ backgroundColor: `${weekdayNumber === index && "#454cde"}`, color: `${weekdayNumber === index && "white"}` }}>{ translatedNames[index] }</MealDay>
+                        <Meal>{ mealPlan.meals[day] }</Meal>
+                    </MealWrapper>
+                }) }
+            </motion.div>
 
             {
                 /*
@@ -241,6 +268,32 @@ const Left = styled.div`
     }
 `
 
+const Right = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    
+    @media ${device.tablet} { 
+        display: none;
+    }
+`
+
+const Shot = styled.img`
+    transform: scale(1.5) rotateY(-20deg) rotateX(20deg) rotateZ(0deg);
+    max-width: 400px;
+    width: 100%;
+    transition: 1000ms ease;
+
+    @media ${device.anythingAboveLaptopL} { 
+        max-width: 500px;
+    }
+
+    &:hover {
+        transform: scale(1.6) rotateY(0deg) rotateX(0deg) rotateZ(0deg);
+    }
+`
+
 const HeroText = styled.h1`
     font-family: 'Inter';
     font-weight: 400;
@@ -328,7 +381,7 @@ const MarqueeText = styled.p`
     white-space: pre;
 `
 
-const MealWrapper = styled.div`
+const MealWrapper = styled(motion.div)`
     display: flex;
     align-items: center;
     column-gap: 10px;
