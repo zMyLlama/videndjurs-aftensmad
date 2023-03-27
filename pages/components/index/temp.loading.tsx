@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { motion } from "framer-motion";
 import dayjs, {Dayjs} from "dayjs";
 import isoWeek from 'dayjs/plugin/isoWeek';
@@ -37,12 +38,17 @@ const item = {
 }
 
 function TempLoading() {
-    const clientDate: Dayjs = dayjs();
-    console.log(clientDate);
-    const weekNumber = clientDate.isoWeek();
-    console.log(weekNumber);
-    const weekdayNumber = (clientDate.isoWeekday() - 1);
-    console.log(weekdayNumber);
+    const [ clientDateState, setClientDateState ] = useState<Dayjs>(dayjs());
+    const [ weekNumberState, setWeekNumberState ] = useState<number>(0);
+    const [ weekdayNumberState, setWeekdayNumberState ] = useState<number>(0);
+
+    
+    useEffect(() => {
+        const clientDate: Dayjs = dayjs();
+        setClientDateState(clientDate)
+        setWeekNumberState(clientDate.isoWeek());
+        setWeekdayNumberState((clientDate.isoWeekday() - 1));
+    }, [])
 
     return ( 
         <Wrapper>
@@ -60,11 +66,11 @@ function TempLoading() {
                 <Logo href="/">campusmad.dk</Logo>
                 <MealPlanStatus 
                     style={{ 
-                        color: weekNumber === mealPlan.week ? "#43965b" : "#c83e2e",
-                        backgroundColor: weekNumber === mealPlan.week ? "#d9f9e1" : "#fae5e3", 
+                        color: weekNumberState === mealPlan.week ? "#43965b" : "#c83e2e",
+                        backgroundColor: weekNumberState === mealPlan.week ? "#d9f9e1" : "#fae5e3", 
                     }}
                 >
-                    { weekNumber === mealPlan.week ? "Up-to-date" : "Forældet" }
+                    { weekNumberState === mealPlan.week ? "Up-to-date" : "Forældet" }
                 </MealPlanStatus>
             </Navigation>
 
@@ -96,7 +102,7 @@ function TempLoading() {
                     return <MealWrapper
                         variants={item}
                     >
-                        <MealDay style={{ backgroundColor: `${weekdayNumber === index && "#454cde"}`, color: `${weekdayNumber === index && "white"}` }}>{ translatedNames[index] }</MealDay>
+                        <MealDay style={{ backgroundColor: `${weekdayNumberState === index ? "#454cde" : "#D0D5DD"}`, color: `${weekdayNumberState === index ? "white" : "#181818"}` }}>{ translatedNames[index] }</MealDay>
                         <Meal>{ mealPlan.meals[day] }</Meal>
                     </MealWrapper>
                 }) }
