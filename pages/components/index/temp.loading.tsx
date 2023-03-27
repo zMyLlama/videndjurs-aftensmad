@@ -1,184 +1,375 @@
+import dayjs, {Dayjs} from "dayjs";
+import isoWeek from 'dayjs/plugin/isoWeek';
+import Marquee from "react-fast-marquee";
 import styled from "styled-components"
 import { device } from "../../../js/devices"
 
+const translatedNames : any = ["Ma", "Ti", "On", "To", "Fr", "Lø", "Sø"]
+const mealPlan : any = {
+    "week": 13,
+    "meals": {
+        "monday": "Kyllingfilet m/bacon, ovnkartofler og barbecuesovs",
+        "tuesday": "Flæskesteg m/kartofler, rødkål og brun sovs",
+        "wednesday": "Kødboller m/kartofler, rødkål og brun sovs",
+        "thursday": "Fiskefrikadeller m/rugbrød, remoulade og citron",
+        "friday": "Tarteletter (Sidste aften måltid inden ferien)",
+        "saturday": "No way det jo ferie. Den nye madplan er godt under udvikling!",
+        "sunday": "No way det jo ferie. Den nye madplan er godt under udvikling!",
+    }
+}
+
+dayjs.extend(isoWeek);
+
 function TempLoading() {
+    const clientDate: Dayjs = dayjs();
+    const weekNumber = clientDate.isoWeek();
+    const weekdayNumber = (clientDate.isoWeekday() - 1);
+
     return ( 
         <Wrapper>
-            <Header>Under ombygning</Header>
-            <Paragraph>
-                Det vigtigste på siden er at man kan se madplanen, siden dette stadig er muligt har jeg tænkt mig at lukke siden i ukendt tid.
-                <br />
-                <br />
-                Grunden til jeg vælger og gøre dette er for at siden kan blive mere modulær og potentailt bruges af andre skoler.
-                <br />
-                Jeg skal derfor bruge tid på at forbedre koden, tilgængelighed og designet af hjemmesiden, udover dette skal jeg også integrere den med et fuldt konto system.
-                <br />
-                <br />
-                Når siden åbner op igen vil det være et krav at have en konto, udover dette vil der potentailt også være en app til android.
-                <br />
-                <br />
-                Mange tak for jeres forståelse, jeg satser på faktisk at lave den nye hjemmeside og ikke bare forsinke den forevigt. 
-                <br />
-                <br />
-                <b>- Educended</b>
-            </Paragraph>
+            <MarqueeWrapper>
+                <Marquee
+                    gradient={false}
+                    speed={20}
+                >
+                    {[1,2,3,4,5,6,7,8,9,10,11,12].map(i => {
+                        return <MarqueeText key={i}>Under ombygning   •  </MarqueeText>
+                    })}
+                </Marquee>
+            </MarqueeWrapper>
+            <Navigation>
+                <Logo href="/">campusmad.dk</Logo>
+                <MealPlanStatus 
+                    style={{ 
+                        color: weekNumber === mealPlan.week ? "#43965b" : "#c83e2e",
+                        backgroundColor: weekNumber === mealPlan.week ? "#d9f9e1" : "#fae5e3", 
+                    }}
+                >
+                    { weekNumber === mealPlan.week ? "Up-to-date" : "Forældet" }
+                </MealPlanStatus>
+            </Navigation>
 
-            <Line />
+            <NewWrapper>
+                <Left>
+                    <HeroText>En ny <InsideText><InsideTextImage src="/LeakForCampusmad.png" /></InsideText> madplan er på vej til <InsideText style={{ width: "70px" }}><InsideTextImage style={{ scale: "1.4" }} src="/SuprisedCup.webp" /></InsideText> dig 🙌</HeroText>
+                    <HeroParagraph>... men indtil da kan du bruge denne side </HeroParagraph>
 
-            <List>
-                <Item>
-                    <Left>Mandag</Left>
-                    <Right>Kyllingfilet m/bacon, ovnkartfler og barbecuesovs</Right>
-                </Item>
-                <Item>
-                    <Left>Tirsdag</Left>
-                    <Right>Flæskesteg m/kartofler, rødkål og brun sovs</Right>
-                </Item>
-                <Item>
-                    <Left>Onsdag</Left>
-                    <Right>Kødboller m/kartofler, rødkål og brun sovs</Right>
-                </Item>
-                <Item>
-                    <Left>Torsdag</Left>
-                    <Right>Fiskefrikadeller m/rugbrød, remoulade og citron</Right>
-                </Item>
-                <Item>
-                    <Left>Fredag</Left>
-                    <Right>Tarteletter (Sidste aften måltid inden ferien)</Right>
-                </Item>
-                <Item>
-                    <Left>Lørdag</Left>
-                    <Right>No way det jo ferie. Den nye madplan er godt under udvikling!</Right>
-                </Item>
-                <Item>
-                    <Left>Søndag</Left>
-                    <Right>No way det jo ferie. Den nye madplan er godt under udvikling!</Right>
-                </Item>
-            </List>
+                    <ReadMoreButton onClick={() => alert("Kommer snart. Jeg ville gerne lave dette på en aften og denne knap var ikke en prioritet.")}>
+                        Læs mere
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M4.16672 9.99996H15.8334M15.8334 9.99996L10.0001 4.16663M15.8334 9.99996L10.0001 15.8333" stroke="white" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </ReadMoreButton>
+                </Left>
+                <Gradient src="/GradientBG.png" />
+            </NewWrapper>
 
-            <ErrorWrapper>
-                <Error>CONSTRUCTION</Error>
-            </ErrorWrapper>
+            <MealPlanTitle>Madplan</MealPlanTitle>
+            { Object.keys(mealPlan.meals).map((day, index) => {
+                return <MealWrapper>
+                    <MealDay style={{ backgroundColor: `${weekdayNumber === index && "#454cde"}`, color: `${weekdayNumber === index && "white"}` }}>{ translatedNames[index] }</MealDay>
+                    <Meal>{ mealPlan.meals[day] }</Meal>
+                </MealWrapper>
+            }) }
+
+            {
+                /*
+                    <List>
+                        <Item>
+                            <Left>Mandag</Left>
+                            <Right>Kyllingfilet m/bacon, ovnkartfler og barbecuesovs</Right>
+                        </Item>
+                        <Item>
+                            <Left>Tirsdag</Left>
+                            <Right>Flæskesteg m/kartofler, rødkål og brun sovs</Right>
+                        </Item>
+                        <Item>
+                            <Left>Onsdag</Left>
+                            <Right>Kødboller m/kartofler, rødkål og brun sovs</Right>
+                        </Item>
+                        <Item>
+                            <Left>Torsdag</Left>
+                            <Right>Fiskefrikadeller m/rugbrød, remoulade og citron</Right>
+                        </Item>
+                        <Item>
+                            <Left>Fredag</Left>
+                            <Right>Tarteletter (Sidste aften måltid inden ferien)</Right>
+                        </Item>
+                        <Item>
+                            <Left>Lørdag</Left>
+                            <Right>No way det jo ferie. Den nye madplan er godt under udvikling!</Right>
+                        </Item>
+                        <Item>
+                            <Left>Søndag</Left>
+                            <Right>No way det jo ferie. Den nye madplan er godt under udvikling!</Right>
+                        </Item>
+                    </List>
+                */
+            }
         </Wrapper>
     );
 }
 
-const Wrapper = styled.div`
-    background-color: #070B0D;
+const MealPlanTitle = styled.p`
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 16px;
+    color: #344054;
+
+    margin-top: 30px;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+`
+
+const Gradient = styled.img`
     position: absolute;
+    width: 60%;
+    height: 100%;
+    right: 0;
+    top: 0;
+    opacity: 0.8;
+
+    border-bottom-right-radius: 4rem;
+    z-index: -1;
+
+    @media ${device.tablet} { 
+        border-bottom-right-radius: 2rem;
+    }
+`
+
+const InsideText = styled.div`
+    position: relative;
+
+    border-radius: 100px;
+    margin-bottom: -5px;
+    margin-right: -5px;
+    height: 40px;
+    width: 100px;
+    background-color: black;
+    display: inline-block;
+    overflow: hidden;
+
+    @media ${device.anythingAboveLaptopL} { 
+        height: 48px;
+    }
+    @media ${device.tablet} { 
+        height: 35px;
+    }
+`
+
+const InsideTextImage = styled.img`
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+`
+
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+
+    position: fixed;
     left: 0;
     top: 0;
     width: 100%;
-    height: 100vh;
-
-    padding: 35px;
-    display: flex;
-    flex-direction: column;
-
-    overflow-y: scroll;
-    @media ${device.mobileL} { 
-        
-    }
-`
-
-const Header = styled.h1`
-    font-weight: 700;
-    font-size: 90px;
-
-    color: #FFFFFF;
-    white-space: nowrap;
-
-    @media ${device.tablet} { font-size: 45px; }
-    @media ${device.mobileL} { font-size: 34px; }
-`
-
-const Paragraph = styled.p`
-    max-width: 800px;
-    width: 100%;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 25px;
-
-    color: #FFFFFF;
-
-    @media ${device.tablet} { font-size: 14px; line-height: 18px; }
-`
-
-const Line = styled.div`
-    max-width: 600px;
-    width: 100%;
-    height: 3px;
-    flex-shrink: 0;
-    border-radius: 100px;
-    background-color: #202020;
-
-    margin-top: 50px;
-    margin-bottom: 50px;
-`
-
-const List = styled.div`
-    max-width: 600px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    row-gap: 45px;
-
     height: 100%;
     overflow-y: scroll;
 
-    min-height: 500px;
-    @media ${device.mobileL} { 
-        min-height: 300px;
+    background-color: white;
+`
+
+const NewWrapper = styled.div`
+    position: relative;
+    display: flex;
+    flex-shrink: 0;
+    z-index: -2;
+
+    background-color: #eff0f2;
+    width: 100%;
+    height: fit-content;
+    min-height: 200px;
+    border-bottom-left-radius: 4rem;
+    border-bottom-right-radius: 4rem;
+
+    padding-top: 30px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 60px;
+
+    @media ${device.tablet} { 
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 40px;
+        border-bottom-left-radius: 2rem;
+        border-bottom-right-radius: 2rem;
     }
 `
 
-const Item = styled.p`
-    width: 100%;
+const ReadMoreButton = styled.button`
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #444CE7;
+    color: white;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 12px;
+
+    height: 48px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 40px;
+
+    @media ${device.tablet} { 
+        margin-top: 30px;
+        height: 42px;
+    }
+`
+
+const Left = styled.div`
+    width: 470px;
     flex-shrink: 0;
+
+    @media ${device.tablet} { 
+        width: 100%;
+    }
+`
+
+const HeroText = styled.h1`
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 45px;
+    white-space: pre-wrap;
+
+    @media ${device.anythingAboveLaptopL} { 
+        font-size: 63px;
+        line-height: 100%;
+    }
+    @media ${device.tablet} { 
+        font-size: 40px;
+        line-height: 110%;
+    }
+`
+
+const HeroParagraph = styled.p`
+    margin-top: 10px;
+    color: #344054;
+
+    @media ${device.tablet} { 
+        font-size: 16px;
+    }
+`
+
+const Navigation = styled.nav`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+
+    width: 100%;
+    height: 64px;
+    border-bottom: solid 1px #D0D5DD;
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+
+    padding-left: 40px;
+    padding-right: 40px;
+
+    @media ${device.tablet} { 
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+`
+
+const MealPlanStatus = styled.p`
+    font-family: 'Inter';
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 100px;
+
+    padding: 5px 15px;
+
+    @media ${device.tablet} { 
+        font-size: 14px;
+    }
+`
+
+const Logo = styled.a`
+    font-size: 28px;
+    font-weight: 800;
+    text-decoration: none;
+    color: #454cde;
+
+    @media ${device.tablet} { 
+        font-size: 22px;
+    }
+`
+
+const MarqueeWrapper = styled.div`
     display: flex;
     align-items: center;
-    column-gap: 50px;
-
-    @media ${device.mobileL} { column-gap: 35px; }
-`
-
-const Left = styled.p`
     flex-shrink: 0;
-    font-weight: 700;
-    font-size: 20px;
-    color: #C2C3C3;
 
-    @media ${device.mobileL} { font-size: 16px; }
-`
-const Right = styled.p`
     width: 100%;
-    font-weight: 600;
-    font-size: 20px;
-    text-align: right;
-    color: #FFFFFF;
+    height: 40px;
 
-    @media ${device.mobileL} { font-size: 16px; }
+    background-color: black;
 `
 
-const ErrorWrapper = styled.div`
-    position: absolute;
-    right: 50px;
-    top: 0;
+const MarqueeText = styled.p`
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    white-space: pre;
+`
+
+const MealWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+
+    width: calc(100% - 40px);
+    min-height: 60px;
+    border: 1px solid #D0D5DD;
+    border-radius: 12px;
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+    flex-shrink: 0;
+
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+`
+
+const MealDay = styled.p`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 300px;
-    height: 100vh;
-    overflow: hidden;
+    flex-shrink: 0;
 
-    @media ${device.laptopS} { display: none; }
+    font-size: 14px;
+    width: 50px;
+    aspect-ratio: 1 / 1;
+
+    font-family: 'Inter';
+    font-weight: 800;
+    background-color: #D0D5DD;
+    font-size: 24px;
+    color: #181818;
+    border-radius: 8px;
 `
 
-const Error = styled.h1`
-    font-weight: 700;
-    font-size: 14vh;
-    color: #202020;
-    transform: rotate(90deg);
+const Meal = styled.p`
+    font-size: 16px;
+    font-weight: 300;
+    font-family: 'Inter';
+
+    margin-top: 5px;
 `
 
 export default TempLoading;

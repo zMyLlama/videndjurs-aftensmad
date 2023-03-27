@@ -46,49 +46,50 @@ function Home() {
   const [ data, setData ] = useState(dataArr);
   const [ isLoading, setIsLoading ] = useState(true);
 
+  
+  /*
   useEffect(() => {
     setPreCalculatedRandomValue(Math.random() * (99 - 70) + 70);
     localStorage.getItem("theme")
     setTheme(localStorage.getItem("theme") ? localStorage.getItem("theme") as string : "light");
     setIsLoading(true);
 
-    /*
       Get week number from users device.
-    */
-    var date : any;
-    var startDate : any;
-
-    date = new Date();
-    setToday(weekday[date.getDay()]);
-    
-    startDate = new Date(date.getFullYear(), 0, 1);
-    const days = Math.floor((date - startDate) /
-        (24 * 60 * 60 * 1000));
-    var weekNumberResult = Math.ceil(days / 7);
-    weekday[date.getDay()] == "Sunday" ? weekNumberResult -= 1 : null; // De satans amerikanere.
-    setWeekNumber(weekNumberResult);
-    setCurrentlySelectedWeek(weekNumberResult);
-
-    /*
+      var date : any;
+      var startDate : any;
+      
+      date = new Date();
+      setToday(weekday[date.getDay()]);
+      
+      startDate = new Date(date.getFullYear(), 0, 1);
+      const days = Math.floor((date - startDate) /
+      (24 * 60 * 60 * 1000));
+      var weekNumberResult = Math.ceil(days / 7);
+      weekday[date.getDay()] == "Sunday" ? weekNumberResult -= 1 : null; // De satans amerikanere.
+      setWeekNumber(weekNumberResult);
+      setCurrentlySelectedWeek(weekNumberResult);
+      
+      */
+      /*
       Checks the cookies to see if it should display an announcement
-    */
-    const cookies = document.cookie.split(";");
-    var exists : boolean = false;
-    cookies.map((key) => {
+      const cookies = document.cookie.split(";");
+      var exists : boolean = false;
+      cookies.map((key) => {
         if (key.split("=")[0].toString() == announcementKey || key.split("=")[0].toString() == " " + announcementKey) {
-            exists = true;
+          exists = true;
         }
-    })
-    if (!exists) { setAnnouncementVisible(true); }
-
+      })
+      if (!exists) { setAnnouncementVisible(true); }
+      
+      */
     /*
       Function that fetchs the data on the client and populates the client with it.
-    */
-    const fetchData = async function() {
-      const res = await fetch(getHostName() + '/api/getData', { /* https://campusmad.netlify.app/api/getData */
-        headers: {
-          'CONTENT_TYPE': 'application/json',
-        },
+      const fetchData = async function() {
+        
+        const res = await fetch(getHostName() + '/api/getData', {
+          headers: {
+            'CONTENT_TYPE': 'application/json',
+          },
         method: 'GET',
       })
 
@@ -97,8 +98,10 @@ function Home() {
       //setIsLoading(false);
     }
     fetchData();
+    
   }, []);
-
+  */
+  
   const changeCurrentlySelectedWeek = function(Value: number) {
     setCurrentlySelectedWeek(currentlySelectedWeek + Value);
   }
@@ -109,7 +112,7 @@ function Home() {
   }
 
   const [preCalculatedRandomValue, setPreCalculatedRandomValue] = useState(0);
-  if (isLoading) return (
+  return (
     <>
     <TempLoading />
     { /*<LoaderWrapper> 
