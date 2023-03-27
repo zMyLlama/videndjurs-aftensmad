@@ -79,7 +79,7 @@ function TempLoading() {
                     <HeroText>En ny <InsideText><InsideTextImage src="/LeakForCampusmad.png" /></InsideText> madplan er på vej til <InsideText style={{ width: "70px" }}><InsideTextImage style={{ scale: "1.4" }} src="/SuprisedCup.webp" /></InsideText> dig 🙌</HeroText>
                     <HeroParagraph>... men indtil da kan du bruge denne side </HeroParagraph>
 
-                    <ReadMoreButton onClick={() => alert("Kommer snart. Jeg ville gerne lave dette på en aften og denne knap var ikke en prioritet.")}>
+                    <ReadMoreButton onClick={() => alert("Kommer snart... Jeg ville gerne lave siden på en aften og denne knap var ikke en prioritet.")}>
                         Læs mere
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M4.16672 9.99996H15.8334M15.8334 9.99996L10.0001 4.16663M15.8334 9.99996L10.0001 15.8333" stroke="white" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
@@ -102,7 +102,7 @@ function TempLoading() {
                     return <MealWrapper
                         variants={item}
                     >
-                        <MealDay style={{ backgroundColor: `${weekdayNumberState === index ? "#454cde" : "#D0D5DD"}`, color: `${weekdayNumberState === index ? "white" : "#181818"}` }}>{ translatedNames[index] }</MealDay>
+                        <MealDay style={{ backgroundColor: `${weekdayNumberState === index && weekNumberState === mealPlan.week ? "#454cde" : "#D0D5DD"}`, color: `${weekdayNumberState === index && weekNumberState === mealPlan.week ? "white" : "#181818"}` }}>{ translatedNames[index] }</MealDay>
                         <Meal>{ mealPlan.meals[day] }</Meal>
                     </MealWrapper>
                 }) }
