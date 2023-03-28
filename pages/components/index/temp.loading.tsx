@@ -12,7 +12,7 @@ const mealPlan : any = {
     "meals": {
         "monday": "Kyllingfilet m/bacon, ovnkartofler og barbecuesovs",
         "tuesday": "Flæskesteg m/kartofler, rødkål og brun sovs",
-        "wednesday": "Kødboller m/kartofler, rødkål og brun sovs",
+        "wednesday": "Kødboller i hot peanutsovs m/jasmin ris",
         "thursday": "Fiskefrikadeller m/rugbrød, remoulade og citron",
         "friday": "Tarteletter (Sidste aften måltid inden ferien)",
         "saturday": "No way det jo ferie. Den nye madplan er godt under udvikling!",
