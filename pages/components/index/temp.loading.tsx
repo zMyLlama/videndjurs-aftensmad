@@ -8,7 +8,7 @@ import { device } from "../../../js/devices"
 
 const translatedNames : any = ["Ma", "Ti", "On", "To", "Fr", "Lø", "Sø"]
 const mealPlan : any = {
-    "week": 13,
+    "week": 15,
     "meals": {
         "monday": "Ferie 🥸",
         "tuesday": "Pasta m/kødsovs",
