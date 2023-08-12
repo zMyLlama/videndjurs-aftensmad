@@ -16,7 +16,7 @@ const mealPlan : any = {
         "thursday": "Pasta med kødsovs med pølser",
         "friday": "Stegt flæsk med kartofler og persillesovs",
         "saturday": "Marineret steg med ovnkartofler og sovs",
-        "sunday": "Kyllingeburger",
+        "sunday": "Pizza",
     }
 }
 
