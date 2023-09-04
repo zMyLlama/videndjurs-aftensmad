@@ -183,7 +183,7 @@ const InsideText = styled.div`
         height: 48px;
     }
     @media ${device.tablet} { 
-        height: 39px;
+        height: 35px;
     }
 `
 
@@ -299,7 +299,7 @@ const Shot = styled.img`
 const HeroText = styled.h1`
     font-family: 'Inter';
     font-weight: 400;
-    font-size: 35px;
+    font-size: 38px;
     white-space: pre-wrap;
 
     @media ${device.anythingAboveLaptopL} { 
@@ -307,7 +307,7 @@ const HeroText = styled.h1`
         line-height: 100%;
     }
     @media ${device.tablet} { 
-        font-size: 35px;
+        font-size: 38px;
         line-height: 110%;
     }
 `
