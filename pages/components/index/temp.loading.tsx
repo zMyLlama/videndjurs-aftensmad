@@ -76,15 +76,8 @@ function TempLoading() {
 
             <NewWrapper>
                 <Left>
-                    <HeroText>En ny <InsideText><InsideTextImage src="/LeakForCampusmad.png" /></InsideText> madplan er på vej til <InsideText style={{ width: "70px" }}><InsideTextImage style={{ scale: "1.4" }} src="/SuprisedCup.webp" /></InsideText> dig 🙌</HeroText>
-                    <HeroParagraph>... men indtil da kan du bruge denne side </HeroParagraph>
-
-                    <ReadMoreButton onClick={() => alert("Kommer snart... Jeg ville gerne lave siden på en aften og denne knap var ikke en prioritet.")}>
-                        Læs mere
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M4.16672 9.99996H15.8334M15.8334 9.99996L10.0001 4.16663M15.8334 9.99996L10.0001 15.8333" stroke="white" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </ReadMoreButton>
+                    <HeroText>Snart åbnes <InsideText><InsideTextImage src="/LeakForCampusmad.png" /></InsideText> der et nyt kapitel for campusmad 🙌</HeroText>
+                    <HeroParagraph>... bare vent en smule længere </HeroParagraph>
                 </Left>
                 <Right>
                     <Shot src="/WebsiteShot.png" />
@@ -306,7 +299,7 @@ const Shot = styled.img`
 const HeroText = styled.h1`
     font-family: 'Inter';
     font-weight: 400;
-    font-size: 45px;
+    font-size: 35px;
     white-space: pre-wrap;
 
     @media ${device.anythingAboveLaptopL} { 
@@ -314,7 +307,7 @@ const HeroText = styled.h1`
         line-height: 100%;
     }
     @media ${device.tablet} { 
-        font-size: 40px;
+        font-size: 35px;
         line-height: 110%;
     }
 `
