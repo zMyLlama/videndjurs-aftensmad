@@ -183,7 +183,7 @@ const InsideText = styled.div`
         height: 48px;
     }
     @media ${device.tablet} { 
-        height: 35px;
+        height: 39px;
     }
 `
 
