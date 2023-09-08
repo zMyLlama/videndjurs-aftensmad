@@ -63,7 +63,7 @@ function TempLoading() {
                 </Marquee>
             </MarqueeWrapper>
             <Navigation>
-                <Logo href="/">campusmad.dk</Logo>
+                <Logo href="/">minmadplan.dk</Logo>
                 <MealPlanStatus 
                     style={{ 
                         color: weekNumberState === mealPlan.week ? "#43965b" : "#c83e2e",
