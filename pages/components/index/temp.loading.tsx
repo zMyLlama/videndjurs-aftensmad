@@ -14,9 +14,9 @@ const mealPlan : any = {
         "tuesday": "Græsk farsbrød m/tzatziki og halve ovnkartofler",
         "wednesday": "Fiskefrikadeller m/bådkartofler, gulerodsråkost og remoulade",
         "thursday": "Millionbøf m/spaghetti",
-        "friday": "Fyldt kalkunbryst m/ris og paprikasovs",
+        "friday": "Husetsgryde m/ris",
         "saturday": "Andelår m/kartofler, rødkål og sovs",
-        "sunday": "Blomkålssuppe m/kødboller og pasta",
+        "sunday": "Fiskefilet m/pommesfritter",
     }
 }
 
