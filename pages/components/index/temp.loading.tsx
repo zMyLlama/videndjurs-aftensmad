@@ -8,15 +8,15 @@ import { device } from "../../../js/devices"
 
 const translatedNames : any = ["Ma", "Ti", "On", "To", "Fr", "Lø", "Sø"]
 const mealPlan : any = {
-    "week": 46,
+    "week": 47,
     "meals": {
-        "monday": "Kylling i peanutbuttersovs med ris",
-        "tuesday": "Lasagnette",
-        "wednesday": "Taco med det hele",
-        "thursday": "Hakkebøf med bløde løg, brun sovs og kartofler",
-        "friday": "Frikadeller med flødekartofler",
-        "saturday": "Kyllingegryde med pasta",
-        "sunday": "Kokkens overraskelse med ris",
+        "monday": "Rullesteg m/persille, kartofler, brun sovs og asier",
+        "tuesday": "Pasta carbonara",
+        "wednesday": "Kyllingebryst m/pikantost, bacon og ristede kartofler",
+        "thursday": "Tyrkisk suppe m/brød m/cremefraiche",
+        "friday": "Kylling i karry m/ris",
+        "saturday": "Det julefrokost - wooohoooo!!! 🎄🎁🎅",
+        "sunday": "Hotdogs",
     }
 }
 
