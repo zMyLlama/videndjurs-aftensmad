@@ -1,22 +1,22 @@
-import { useEffect, useState } from 'react';
-import { motion } from "framer-motion";
-import dayjs, {Dayjs} from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import isoWeek from 'dayjs/plugin/isoWeek';
+import { motion } from "framer-motion";
+import { useEffect, useState } from 'react';
 import Marquee from "react-fast-marquee";
-import styled from "styled-components"
-import { device } from "../../../js/devices"
+import styled from "styled-components";
+import { device } from "../../../js/devices";
 
 const translatedNames : any = ["Ma", "Ti", "On", "To", "Fr", "Lø", "Sø"]
 const mealPlan : any = {
-    "week": 49,
+    "week": 4,
     "meals": {
-        "monday": "Chili con carne m/ris og cremefraiche",
-        "tuesday": "Pitabrød m/oksekød, skinke, diverse grønt og dressing",
-        "wednesday": "Kylling i abrikossovs m/vilde ris",
-        "thursday": "Karbonader m/blomkål, gulerødder, broccoli, kartofler og bearnaisesovs",
-        "friday": "Svinekøller m/flødekartofler",
-        "saturday": "Karrysuppe m/suppehorn og kylling",
-        "sunday": "Kokkens overraskelse",
+        "monday": "Fiskefilet m/pommes fritter, remoulade, ketchup og citron",
+        "tuesday": "Hawaii koteletter m/ris",
+        "wednesday": "Fyldt kyllingebryst m/ovnkartofler, paprikasovs og dampede bønner",
+        "thursday": "Mexicansk suppe m/friskbagt brød",
+        "friday": "Græsk farsbrød m/tzatziki og små stegte kartofler",
+        "saturday": "Wokpande m/kalkun og nudler",
+        "sunday": "Lasagnette",
     }
 }
 
