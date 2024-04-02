@@ -10,13 +10,13 @@ const translatedNames : any = ["Ma", "Ti", "On", "To", "Fr", "Lø", "Sø"]
 const mealPlan : any = {
     "week": 12,
     "meals": {
-        "monday": "Biksemad",
-        "tuesday": "Anitas ret med kylling og nudler",
-        "wednesday": "Spaghetti med kødsovs",
-        "thursday": "Karbonader med grønt Kartofler og Bearnaise sovs",
-        "friday": "Frikadeller med Rugbrød og Agurkesalat",
-        "saturday": "Rigtig god Påske ferie. Vi ses igen Tirsdag d. 2 April",
-        "sunday": "ferie",
+        "monday": "Ferie",
+        "tuesday": "Italienske kødboller i tomatsovs med spaghetti",
+        "wednesday": "Kyllingepande med ris",
+        "thursday": "Brændende kærlighed",
+        "friday": "Medister med brun sovs, rødkål og kartofler",
+        "saturday": "Byg selv burger med oksekød",
+        "sunday": "Chilli con carne med ris og chreme fraiche",
     }
 }
 
