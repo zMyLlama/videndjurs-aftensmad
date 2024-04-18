@@ -16,7 +16,7 @@ const mealPlan : any = {
         "thursday": "Thailandsk wokpande m/nudler og sur/sød sovs",
         "friday": "Drengerøvsgryde m/ris",
         "saturday": "Tomatsuppe m/suppehorn, kødboller og flutes",
-        "sunday": "Pulled pork buurger m/coleslaw",
+        "sunday": "Pulled pork burger m/coleslaw",
     }
 }
 
