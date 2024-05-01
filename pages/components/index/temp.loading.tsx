@@ -15,8 +15,8 @@ const mealPlan : any = {
         "wednesday": "Estagon kylling med Choron sovs og paste sløjfer og melon/Feta salat",
         "thursday": "Tina's Lasange",
         "friday": "Ribbensteg med sovs og Kartofler",
-        "saturday": "Simons Fantasi",
-        "sunday": "Anita's Fantasi",
+        "saturday": "Biksemad",
+        "sunday": "Kokkens Fantasi",
     }
 }
 
