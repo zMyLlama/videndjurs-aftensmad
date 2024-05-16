@@ -13,9 +13,9 @@ const mealPlan : any = {
         "monday": "Barbecue marineret steg med pastasalat",
         "tuesday": "Forloren hare med det hele",
         "wednesday": "Kylling med cashewnødder og stegte kartofler",
-        "thursday": "Pasta i fad med oksekød",
-        "friday": "Hamburgerryg med stuvet ærter og gullerødder og kartofler",
-        "saturday": "Mexicanske fiks med bådkartofler",
+        "thursday": "Hamburgerryg med stuvet ærter og gullerødder og kartofler",
+        "friday": "Pasta i fad med oksekød",
+        "saturday": "Mexicanske fisk med bådkartofler",
         "sunday": "Kyllinge burgere",
     }
 }
