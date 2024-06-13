@@ -13,7 +13,7 @@ const mealPlan : any = {
         "monday": "Gordon bleu med kartofler og sovs",
         "tuesday": "Millionbøf med ris",
         "wednesday": "Smør selv sandwich",
-        "thursday": "Fiskefrikadeller med kartofler og persillesovs",
+        "thursday": "Fiskefrikadeller med rugbrød og remoulade",
         "friday": "okse cuvette med kartofler bearnaisesovs og grønt",
         "saturday": "Maltes mysterium",
         "sunday": "Maltes overraskelse",
