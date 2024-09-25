@@ -12,7 +12,7 @@ const mealPlan : any = {
     "meals": {
         "monday": "Lasagne",
         "tuesday": "Italiensk suppe",
-        "wednesday": "Kødboller i hot peanut sovs med jasmin ris",
+        "wednesday": "Boller i karry",
         "thursday": "Chili con carne med ris",
         "friday": "Kyllinge burger",
         "saturday": "Kokkens suppe",
