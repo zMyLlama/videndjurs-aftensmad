@@ -58,7 +58,7 @@ function TempLoading() {
                     speed={20}
                 >
                     {[1,2,3,4,5,6,7,8,9,10,11,12].map(i => {
-                        return <MarqueeText key={i}>Under ombygning   •  </MarqueeText>
+                        return <MarqueeText key={i}>Vores madplan  •  </MarqueeText>
                     })}
                 </Marquee>
             </MarqueeWrapper>
@@ -76,8 +76,7 @@ function TempLoading() {
 
             <NewWrapper>
                 <Left>
-                    <HeroText>Snart åbnes <InsideText><InsideTextImage src="/LeakForCampusmad.png" /></InsideText> der et nyt kapitel for campusmad 🙌</HeroText>
-                    <HeroParagraph>... bare vent en smule længere </HeroParagraph>
+                    <HeroText>Et nyt kapitel for dig, et nyt kapitel for os! Vores madplan er i sigte 👀</HeroText>
                 </Left>
                 <Right>
                     <Shot src="/WebsiteShot.png" />
@@ -298,6 +297,7 @@ const Shot = styled.img`
 
 const HeroText = styled.h1`
     font-family: 'Inter';
+    text-wrap: balance;
     font-weight: 400;
     font-size: 38px;
     white-space: pre-wrap;
