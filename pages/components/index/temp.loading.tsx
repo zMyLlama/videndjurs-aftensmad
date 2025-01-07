@@ -11,7 +11,7 @@ const mealPlan : any = {
     "week": 2,
     "meals": {
         "monday": "Wok med kylling",
-        "tuesday": "Fiskefilet med persillesovs og kartofler",
+        "tuesday": "Fiskefilet med remouladesovs og kartofler",
         "wednesday": "Pasta med kyllingebryst i svampesovs",
         "thursday": "Hakkebøf med bløde løg, kartofler og brun sovs",
         "friday": "Boller i karry",
