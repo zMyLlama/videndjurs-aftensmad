@@ -38,17 +38,29 @@ const item = {
 }
 
 function TempLoading() {
+    const [ show, setShow ] = useState<boolean>(false);
+
     const [ clientDateState, setClientDateState ] = useState<Dayjs>(dayjs());
     const [ weekNumberState, setWeekNumberState ] = useState<number>(0);
     const [ weekdayNumberState, setWeekdayNumberState ] = useState<number>(0);
 
     
     useEffect(() => {
+        const screenWidth = window.innerWidth;
+        if (screenWidth < 500) {
+            window.location.href = "https://beta.minmadplan.dk";
+            return;
+        } else {
+            setShow(true);
+        }
+
         const clientDate: Dayjs = dayjs();
         setClientDateState(clientDate)
         setWeekNumberState(clientDate.isoWeek());
         setWeekdayNumberState((clientDate.isoWeekday() - 1));
     }, [])
+
+    if (!show) return null;
 
     return ( 
         <Wrapper>
